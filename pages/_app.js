@@ -1,8 +1,7 @@
 import "./styles/app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react'
-import { ProtectRoute } from './context/auth'
-import { AuthProvider } from './context/auth'
+import { AuthProvider, ProtectRoute } from "../src/context/auth";
 
 function MyApp({ Component, pageProps}) {
 

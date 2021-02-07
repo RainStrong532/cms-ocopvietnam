@@ -4,8 +4,8 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmpty } from 'validator'
-import {useAuth} from '../../context/auth';
 import {useRouter} from 'next/router'
+import { useAuth } from '../../../src/context/auth';
 
 const required = (value) => {
     if (isEmpty(value)) {

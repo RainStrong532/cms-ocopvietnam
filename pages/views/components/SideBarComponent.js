@@ -1,8 +1,8 @@
 import React from 'react';
 import { SideBarData } from './SideBarData'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { useAuth } from '../../context/auth'
 import Router, { useRouter } from 'next/router'
+import { useAuth } from '../../../src/context/auth';
 
 function SideBarComponent({ }) {
     const [modal, setModal] = React.useState(false);

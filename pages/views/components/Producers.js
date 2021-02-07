@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ListItem from './ListItem';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { headerProducer } from '../../../constants';
-import { getListProducer } from '../../services/Api';
+import { getListProducer } from '../../../src/services/Api';
 
 function Producers() {
     const [listProducer, setListProducer] = useState([]);

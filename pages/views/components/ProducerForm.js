@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { getProducerById } from '../../services/Api';
+import { getProducerById } from '../../../src/services/Api';
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';

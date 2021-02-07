@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import Router, { useRouter } from 'next/router'
 
 import { loginApi } from '../services/Api';
-import LoadingScreen from '../views/components/LoadingScreen';
+import LoadingScreen from '../../pages/views/components/LoadingScreen';
 
 
 const AuthContext = createContext({});
