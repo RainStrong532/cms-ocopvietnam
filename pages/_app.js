@@ -2,16 +2,16 @@ import "./styles/app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react'
 import { AuthProvider, ProtectRoute } from "../src/context/auth";
-import header from 'next/head'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
       <ProtectRoute>
-        <header>
+        <Head>
           <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
-        </header>
+        </Head>
         <Component {...pageProps} />
       </ProtectRoute>
     </AuthProvider>
