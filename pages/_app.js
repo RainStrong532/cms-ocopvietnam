@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <ProtectRoute>
         <Head>
-          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+          <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
         </Head>
         <Component {...pageProps} />
       </ProtectRoute>
