@@ -1,0 +1,80 @@
+.cellTable {
+    height: 100%;
+    vertical-align: middle !important;
+    padding: 18px 20px !important;
+    border-bottom: 2px solid #f7f8fc;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+
+    letter-spacing: 0.2px;
+
+    color: #595959;
+    p {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .imageTable {
+        margin-right: 15px;
+    }
+    .producerImage {
+        width: 49.97px!important;
+        height: 49.97px!important;
+        border-radius: 50%;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+        background-color: #F0F0F0;
+    }
+    .star {
+        width: 20.92px;
+        height: auto;
+        display: inline-block;
+        padding: 0 2.5px;
+    }
+}
+.firstCol {
+    display: flex;
+    align-items: center;
+    border-top: none !important;
+    .imageTable {
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+        margin-right: 15px;
+        width: 71.18px;
+        height: 49.79px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    p{
+        flex-shrink: 100;
+    }
+}
+.headerTable {
+    text-transform: uppercase;
+    border-top: none !important;
+    color: #a9a9a9;
+    border-bottom: 2px solid #f7f8fc;
+    font-size: 14px;
+    font-weight: 500;
+}
+.listItemContainer {
+    margin-top: 30px;
+    padding: 0 60px;
+}
+.cellTable .icon {
+    width: 19px;
+    height: auto;
+}
+.pageOption{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 80px;
+    padding-bottom: 34px;
+    .perpage{
+        margin-right: 25px;
+    }
+}

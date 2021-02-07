@@ -1,0 +1,37 @@
+.pg{
+.pgItem {
+    margin: 0 5.5px;
+    .pgLink {
+        font-family: "Google Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        padding: 0;
+        border: none;
+        letter-spacing: 0.03em;
+
+        color: #595959;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+.pgItem:not(.icon) {
+    .pgLink {
+        margin: 2px 0;
+        width: 28px;
+        height: 28px;
+        background: #12929a;
+        border-radius: 5px;
+    }
+}
+.pgItem.icon {
+    width: 32px;
+    height: 32px;
+}
+}

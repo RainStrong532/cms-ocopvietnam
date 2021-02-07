@@ -1,0 +1,340 @@
+@import "variables";
+.header {
+    display: flex;
+    padding: 45px 60px;
+    align-items: center;
+    border-bottom: 3px solid #f7f8fc;
+    img {
+        width: 8px;
+        height: auto;
+        margin-right: 23px;
+        cursor: pointer;
+    }
+    .backBtn {
+        height: 100%;
+        cursor: pointer;
+    }
+    .headerTitle {
+        font-size: 20px;
+        color: #595959;
+        vertical-align: middle;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+.headerSearch {
+    justify-content: space-between;
+    .headerCnt{
+        display: flex;
+    }
+    .title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 29px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.4px;
+
+        color: #595959;
+    }
+    .extentions {
+        display: flex;
+        .addItem {
+            padding: 0;
+            padding-right: 20px;
+            background-color: $main-color;
+            margin-left: 14px;
+            text-transform: uppercase;
+            img {
+                height: 42px;
+                width: auto;
+                margin: 0;
+            }
+        }
+        .editItem{
+            text-transform: uppercase;
+            background-color: $main-color;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            img{
+                width: 24px;
+                height: auto;
+                margin: 0;
+                margin-right: 10px;
+            }
+        }
+        .search {
+            border: 1.5px solid #c4c4c4;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            img {
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
+            }
+            input {
+                border: none;
+                padding: 6.2px 0;
+                ::placeholder,
+                ::-moz-placeholder,
+                ::-webkit-input-placeholder,
+                ::-ms-input-placeholder,
+                ::-webkit-input-placeholder {
+                    color: #c4c4c4;
+                    font-size: 16px;
+                    line-height: 23px;
+                }
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+            }
+        }
+    }
+}
+.productForm {
+    padding: 40px 20px;
+    .sectionForm {
+        &:first-child {
+            margin-right: 37.5px;
+        }
+        &:last-child {
+            margin-left: 37.5px;
+        }
+    }
+    .section {
+        padding: 0 40px;
+        .title {
+            color: #0f8b93;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        div.btn_add {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .inputContainer {
+            margin-top: 16px;
+            .nameInput {
+                font-size: 14px;
+                color: #595959;
+                font-weight: 500;
+                cursor: context-menu;
+                margin-bottom: 10px;
+            }
+            .detail{
+                color: $main-color;
+            }
+            .inpputContent {
+                border: 1.5px solid #e3e4ed;
+                padding: 0.6625rem 0.75rem;
+                min-height: 45px;
+                width: 100%;
+                border-radius: 5px;
+                line-height: 1.32;
+                vertical-align: middle;
+            }
+        }
+        .inputContainer.dropdown {
+            display: flex;
+            flex-direction: column;
+        }
+        button {
+            border-radius: 5px;
+            background-color: $main-color;
+            border: none;
+            font-family: Be Vietnam;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 18px;
+            line-height: 21px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: -0.24px;
+            color: #ffffff;
+            text-transform: uppercase;
+            padding: 10px 88px;
+            margin-top: 50px;
+        }
+        input,
+        select {
+            font-family: "Be Vietnam" !important;
+            height: calc(1.5em + 0.75rem + 6px);
+            padding: 0.6625rem 0.75rem;
+            width: 100%;
+            border-radius: 5px;
+            border: 1.5px solid #e3e4ed;
+            color: #4b4b4a;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21px;
+            &:focus {
+                border: 1px solid $main-color;
+                border-radius: 5px;
+            }
+        }
+        select {
+            background: url(/images/arrow-down.jpg) no-repeat right;
+            -webkit-appearance: none;
+            background-position-x: 100%;
+            background-size: 30px;
+            font-size: 18px;
+            font-weight: 400;
+            color: #4b4b4a;
+        }
+        .textarea {
+            resize: none;
+            height: 102px;
+        }
+    }
+}
+.imageTable {
+    background: #f4f4f4;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    width: 71.18px;
+    height: 49.79px;
+}
+.mt16 {
+    margin-top: 16px !important;
+}
+.mt62 {
+    margin-top: 62px !important;
+}
+.imagePicker {
+    width: 225px;
+    height: 127.07px;
+    border: 1.5px dashed #dfdfdf;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px;
+    overflow: hidden;
+    .image {
+        position: absolute;
+        width: auto;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    input {
+        position: absolute;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: 10;
+    }
+    .circle {
+        width: 57.82px;
+        height: 57.82px;
+        border-radius: 50%;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 33.04px;
+            height: auto;
+        }
+    }
+}
+.imageHolder {
+    border: 1.5px solid #dfdfdf;
+    background-color: #ffffff;
+    margin-right: 22px;
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 5;
+        border-radius: 8px;
+    }
+    .closeBtn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 20;
+        transform: scale(0.8);
+        transition: transform 0.2s ease;
+        &:hover {
+            transform: scale(1);
+        }
+    }
+    .closeBtn img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        display: none;
+    }
+    &:hover {
+        .overlay {
+            display: block;
+        }
+        .closeBtn img {
+            display: block;
+        }
+    }
+    .image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.dia {
+    max-width: 70vw !important;
+    position: relative;
+    .modal-content {
+        background-color: #f7f8fc;
+        .imageModal {
+            min-height: 80vh;
+            background-size: contain;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            margin: 0 20px;
+            .closeBtn {
+                width: 25px;
+                height: 25px;
+                background-color: rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                z-index: 1002;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.12);
+                }
+                img {
+                    width: 80%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

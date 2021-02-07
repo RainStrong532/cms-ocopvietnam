@@ -1,0 +1,22 @@
+.perpage {
+    color: #595959;
+    .ddToggle {
+        padding: 7px 13px;
+        background-color: #fff;
+        font-family: 'Google Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+
+        letter-spacing: 0.03em;
+
+        color: #595959;
+        min-width: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border: 1.2px solid #595959;
+    }
+}

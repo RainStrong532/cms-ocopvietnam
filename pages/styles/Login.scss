@@ -1,0 +1,144 @@
+@import "variables";
+div.login {
+    background-image: url("/images/background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    // float: left;
+    .container {
+        height: 78%;
+        padding: 0 75px;
+        .row {
+            height: 100%;
+            .horizontal-align{
+                margin: 0!important;
+                height: 100%;
+            }
+        }
+    }
+    .login-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border-radius: 7px;
+        box-shadow: 2px 6px 20px rgba(18, 146, 154, 0.1);
+        padding: 62px 30px;
+        .checkBtn{
+            display: none;
+        }
+        .login-header{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-action {
+            width: 100%;
+        }
+        .loginContent {
+            margin: 35px 0 15px;
+            h1 {
+                color: $main-color;
+                &:first-child {
+                    font-weight: 600;
+                    font-size: 28px;
+                    line-height: 41px;
+                }
+                &:last-child {
+                    font-weight: 700;
+                    font-size: 30px;
+                }
+            }
+        }
+        input, Input {
+            background-color: none;
+            font-family: 'Be VietNam'!important;
+            font-size: 18px;
+            height: 40px;
+            padding: 10px 0px;
+            border: none;
+            box-sizing: border-box;
+            // border-radius: 7px;
+            font-size: 18px;
+            color: #595959;
+            width: 100%;
+            margin: 0 0 10px 0;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #12929a;
+            &::placeholder{
+                font-size: 18px!important;
+            }
+            &:focus {
+                outline: none;
+                // outline-color: $main-color;
+                // border-width: 2px;
+                // border-bottom: 2.5px solid #12929A;
+            }
+        }
+        .inputContainer {
+            position: relative;
+            width: 100%;
+            p {
+                text-align: left;
+                font-size: 14px;
+                line-height: 20px;
+                margin-bottom: 6px;
+                color: #939393;
+            }
+            img {
+                position: absolute;
+                width: 24px;
+                height: auto;
+                right: 10px;
+                top: 32px;
+            }
+            small{
+                text-align: left;
+            }
+        }
+        button:not(.fogot-password-btn) {
+            background-color: $main-color;
+            border-radius: 7px;
+            width: 100%;
+            border: none;
+            color: white;
+            padding: 8px 0;
+            margin-top: 8px;
+            font-size: 16px;
+            transition: all 0.5s ease;
+            &:hover {
+                box-shadow: 0 0 8px $main-color;
+            }
+        }
+        .fpContainer {
+            display: flex;
+            margin-bottom: 16px;
+            div{
+                flex-grow: 1;
+            }
+            .fogot-password-btn {
+                outline: none;
+                text-align: right;
+                color: $main-color;
+                border: none;
+                padding-top: 0;
+                margin-top: 0;
+                font-size: 14px;
+                background-color: transparent;
+                &:hover {
+                    box-shadow: 0 0 4px $main-color;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "name": "fl-homepage",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start -p $PORT"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@zeit/next-css": "^1.0.1",
+        "@zeit/next-sass": "^1.0.1",
+        "add": "^2.0.6",
+        "aos": "^2.3.4",
+        "axios": "^0.21.1",
+        "bootstrap": "^4.5.0",
+        "chart.js": "^2.9.4",
+        "jquery": "^3.5.1",
+        "js-cookie": "^2.2.1",
+        "next": "9.4.4",
+        "next-fonts": "^1.2.0",
+        "node-sass": "^4.14.1",
+        "react": "^16.13.1",
+        "react-alice-carousel": "^2.2.2",
+        "react-bootstrap": "^1.0.1",
+        "react-chartjs-2": "^2.11.1",
+        "react-countup": "^4.3.3",
+        "react-dom": "^16.13.1",
+        "react-validation": "^3.0.7",
+        "reactstrap": "^8.8.1",
+        "skeleton": "^0.1.2",
+        "swr": "^0.4.1",
+        "validator": "^13.5.2"
+    }
+}
