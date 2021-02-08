@@ -1,4 +1,4 @@
-export const DOMAIN =  "http://api-ocop5sao.marveltek.com/v1/"
+export const DOMAIN =  "https://api-ocop5sao.marveltek.com/v1/"
 
 export const enableStatus = {
     _true: "Đã xét duyệt",
