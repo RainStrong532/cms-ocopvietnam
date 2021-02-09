@@ -49,7 +49,7 @@ function Producers({ router }) {
         (isLoading)
             ?
             <div className="content">
-                <SearchHeader title="Sản phẩm" pathname={window.location.pathname + "/add"} />
+                <SearchHeader title="Nhà sản xuất" pathname={window.location.pathname + "/add"} />
                 <LoadingScreen />
             </div>
             :
