@@ -13,6 +13,7 @@ function SearchHeader({ title, pathname, edit, router}) {
             
             if(textSearch){
                 params.search = textSearch;
+                params.query.page = 1;
             }
             router.push({
                 pathname: pathname,
