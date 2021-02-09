@@ -5,7 +5,7 @@ import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmpty } from 'validator'
 import {useRouter} from 'next/router'
-import { useAuth } from '../../../src/context/auth';
+import { useAuth } from '../../../src/contexts/auth';
 
 const required = (value) => {
     if (isEmpty(value)) {
@@ -27,9 +27,6 @@ function Login() {
 
         if (checkBtn.context._errors.length === 0) {
             if(login(username, password)){
-                console.log('====================================');
-                console.log("go to product");
-                console.log('====================================');
                 router.push('/product')
             }
         }

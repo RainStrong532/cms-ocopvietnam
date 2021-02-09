@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import { route } from 'next/dist/next-server/server/router';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { getProducerById } from '../../../src/services/Api';
+import { useAuth } from '../../../src/contexts/auth';
+import { createProducer, getProducerById, getProducers, updateProducer } from '../../../src/services/Api';
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';
@@ -13,15 +16,25 @@ function ProducerForm({ id }) {
     const [email, setEmail] = React.useState("");
     const [representative, setRepresentative] = React.useState("");
 
+    const router = useRouter();
+
+    const auth = useAuth();
+
+    console.log('====================================');
+    console.log("auth: ", auth);
+    console.log('====================================');
     useEffect(() => {
         (async () => {
-            let res = await getProducerById({ id: id });
-            if (res.id) {
-                setName(res.name);
-                setPhoneNumber(res.phone_number);
-                setAddress(res.address);
-                setEmail(res.email);
-                setRepresentative(res.representative);
+            if (id) {
+                let res = await getProducerById({ id: id });
+                if (res.id) {
+                    setName(!(res.name) ? "" : res.name);
+                    setPhoneNumber(!(res.phone_number) ? "" : res.phone_number);
+                    setAddress(!(res.address) ? "" : res.address);
+                    setEmail(!(res.email) ? "" : res.email);
+                    setRepresentative(!(res.representative) ? "" : res.representative);
+                    setImage(res.image ? res.image : "")
+                }
             }
         })();
     }, [])
@@ -68,11 +81,13 @@ function ProducerForm({ id }) {
                                 <div className="inputContainer">
                                     <div className="nameInput mb-0">Logo</div>
                                     {
-                                        (image !== "")
+                                        (image !== "" || image)
                                             ?
-                                            <ImageHolder src={image} />
+                                            <ImageHolder src={image} setImage={setImage} />
                                             :
-                                            <AddImageComponent />
+                                            <AddImageComponent
+                                                setImage={setImage}
+                                            />
                                     }
                                 </div>
                             </Col>
@@ -100,7 +115,53 @@ function ProducerForm({ id }) {
                             </Col>
                         </Row>
                         <div className="btn_add">
-                            <Button className="btn_add">
+                            <Button className="btn_add"
+                                onClick={
+                                    async () => {
+                                        let data = {};
+                                        if (image) {
+                                            data = {
+                                                id,
+                                                name,
+                                                representative,
+                                                phone_number: phoneNumber,
+                                                address,
+                                                email,
+                                                image,
+                                                is_enable: true,
+                                                user: parseInt(auth.isAuthenticated.user)
+                                            }
+                                        } else {
+                                            data = {
+                                                id,
+                                                name,
+                                                representative,
+                                                phone_number: phoneNumber,
+                                                address,
+                                                email,
+                                                is_enable: true,
+                                                user: parseInt(auth.isAuthenticated.user)
+                                            }
+                                        }
+                                        if (!id) {
+                                            let res = await createProducer(data);
+                                            if(res.id){
+                                                router.push(`/producer/${res.id}`);
+                                            }else{
+                                                alert("Thêm mới thất bại");
+                                            }
+                                        } else {
+                                            let res = await updateProducer(data);
+                                            if(res.id){
+                                                router.push(`/producer/${res.id}`);
+                                            }else{
+                                                alert("Cập nhật thất bại");
+                                            }
+                                        }
+
+                                    }
+                                }
+                            >
                                 {
                                     id
                                         ?

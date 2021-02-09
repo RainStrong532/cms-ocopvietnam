@@ -3,25 +3,60 @@ import ListItem from './ListItem';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { headerProduct } from '../../../constants';
 import { getListProduct } from '../../../src/services/Api';
+import Router, { withRouter } from 'next/router'
+import LoadingScreen from './LoadingScreen';
+import SearchHeader from './SearchHeader';
 
-function Products() {
+function Products({ router }) {
+    const [isLoading, setLoading] = useState(false);
     const [listProduct, setListProduct] = useState([]);
+    const [total, setTotal] = useState(0);
+    const getProducts = async () => {
+        setLoading(true);
+        let page = router.query.page || 1;
+        let page_size = router.query.page_size || 20;
+        let search = router.query.search;
+        let res;
+        if (search) {
+            res = await getListProduct({ page: page, page_size: page_size, search: search });
+        } else {
+            res = await getListProduct({ page: page, page_size: page_size });
+        }
+        if (res.results) {
+            setListProduct(res.results);
+            setTotal(res.count);
+        }
+        setLoading(false);
+    }
+    const startLoading = async () => {
+        setLoading(true);
+        getProducts();
+    }
+    const stopLoading = () => {
+        setLoading(false);
+    }
     useEffect(() => {
-        (async () => {
-            let res = await getListProduct(null);
-            console.log('==================getListProduct==================');
-            console.log(res);
-            console.log('====================================');
-            if (res.results) {
-                setListProduct(res.results);
-            }
-        })();
-    }, [])
+        getProducts();
+        Router.events.on('routeChangeStart', startLoading);
+        Router.events.on('routeChangeComplete', stopLoading);
+        return () => {
+            Router.events.off('routeChangeStart', startLoading);
+            Router.events.off('routeChangeComplete', stopLoading);
+        }
+    }, [router])
     return (
-        <div className="content">
-            <ListItem title="Sản phẩm" data={listProduct} header={headerProduct} type={0} />
-        </div>
+        (isLoading)
+            ?
+            <div className="content">
+                <SearchHeader title="Sản phẩm" pathname={window.location.pathname + "/add"} />
+                <LoadingScreen />
+            </div>
+            :
+            <div className="content">
+                <SearchHeader title="Sản phẩm" pathname={window.location.pathname + "/add"} router={router} />
+                <ListItem data={listProduct ? listProduct : []} header={headerProduct} type={0} total={total} getList= {getProducts}/>
+            </div>
     );
 }
 
-export default Products;
+export default withRouter(Products);

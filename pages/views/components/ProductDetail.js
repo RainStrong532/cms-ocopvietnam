@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button, Input } from 'reactstrap';
 import { getProductById } from '../../../src/services/Api';
@@ -14,6 +15,7 @@ function ProductDetail({ id }) {
     const [startDate, setStartDate] = React.useState("");
     const [exprire, setExprire] = React.useState("");
     const [certification, setCertification] = React.useState("");
+    const router = useRouter();
     useEffect(() => {
         (async () => {
             let res = await getProductById({ id: id });
@@ -45,7 +47,7 @@ function ProductDetail({ id }) {
 
     return (
         <div className="content">
-            <SearchHeader title={"Xem chi tiết sản phẩm"} edit={true} pathname={"/product/edit/"+id}/>
+            <SearchHeader title={"Xem chi tiết sản phẩm"} edit={true} pathname={"/product/edit/"+id} router={router}/>
             <div className="productForm">
                 <div className="section">
                     <div className="title">

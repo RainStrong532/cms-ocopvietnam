@@ -1,21 +1,17 @@
 import "./styles/app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react'
-import { AuthProvider, ProtectRoute } from "../src/context/auth";
-import Head from 'next/head'
+import { AuthProvider, ProtectRoute } from "../src/contexts/auth";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps}) {
 
-  return (
-    <AuthProvider>
-      <ProtectRoute>
-        <Head>
-          <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
-        </Head>
-        <Component {...pageProps} />
-      </ProtectRoute>
-    </AuthProvider>
-  )
+    return (
+      <AuthProvider>
+        <ProtectRoute>
+            <Component {...pageProps} />
+        </ProtectRoute>
+      </AuthProvider>
+    )
 }
 
 

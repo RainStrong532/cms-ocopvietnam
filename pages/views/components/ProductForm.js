@@ -1,49 +1,77 @@
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button, Input } from 'reactstrap';
-import { getProductById } from '../../../src/services/Api';
+import { getProducers, getProductById } from '../../../src/services/Api';
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';
 
+let firstLoad = false;
+
 function ProductForm({ id }) {
     const [name, setName] = React.useState("");
     const [star, setCountStar] = React.useState(0);
-    const [image, setImage] = React.useState("");
-    const [producer, setProducer] = React.useState();
+    const [image, setImage] = React.useState({});
+    const [producer, setProducer] = React.useState("");
     const [product, setProduct] = React.useState("");
     const [story, setStory] = React.useState("");
     const [startDate, setStartDate] = React.useState("");
     const [exprire, setExprire] = React.useState("");
     const [certification, setCertification] = React.useState("");
+    const [producers, setProducers] = React.useState([]);
+    const [productImages, setProductImages] = React.useState([]);
+    const [productionImages, setProductionImages] = React.useState([]);
+
     useEffect(() => {
         (async () => {
-            let res = await getProductById({ id: id });
-            if (res.id) {
-                setName(res.name);
-                setCountStar(res.ocop_star);
-                setImage(res.certificate_img);
-                setProducer(res.manufacturer.name);
-                setProduct(res.description);
-                setStory(res.story);
-                setExprire(res.expiry_date);
-                setStartDate(res.issued_on)
-                setCertification(res.ocop_certificate_number);
+            if (id) {
+                let res = await getProductById({ id: id });
+                if (res.id) {
+                    setName(res.name);
+                    setCountStar(res.ocop_star);
+                    setImage(res.certificate_img);
+                    setProducer(res.manufacturer.name);
+                    setProduct(res.description);
+                    setStory(res.story);
+                    setExprire(res.expiry_date);
+                    setStartDate(res.issued_on)
+                    setCertification(res.ocop_certificate_number);
+                }
+            }else{
+                if(!firstLoad){
+                let res = await getProducers();
+                if(res.count){
+                    setProducers(res.results);
+                }
+                }
             }
         })();
     }, [])
 
-    function readURL(event) {
-        if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                setImage(e.target.result)
-            };
-
-            reader.readAsDataURL(event.target.files[0]);
-        }
+    const renderListImage = (list, setList) => {
+        return list.map((item, index) => {
+            <ImageHolder src={item.image} key={index}
+            setImage={(image)=>{
+                let newList = list;
+                newList.splice(index, 1, image)
+                setList(linewListst);
+            }}
+            deleteImage = {() => {
+                let newList = list;
+                newList.splice(index, 1)
+                setList(newList);
+            }}
+            />
+        })
     }
-
+    const renderProducers = () => {
+        return (
+            producers.map((item, index) => {
+                return (
+                    <option value={item.name} key={index}>{item.name}</option>
+                )
+            })
+        )
+    }
     return (
         <div className="content">
             <Header title={id ? "Cập nhật thông tin sản phẩm" : "Thêm sản phẩm"} />
@@ -69,7 +97,7 @@ function ProductForm({ id }) {
                                     <label htmlFor="star" className="nameInput">Số sao</label>
                                     <Input type="select" name="star" id="star"
                                         value={star}
-                                        onChange= {(e) => {
+                                        onChange={(e) => {
                                             setCountStar(e.target.value)
                                         }}
                                     >
@@ -87,11 +115,11 @@ function ProductForm({ id }) {
                                     <label htmlFor="producer" className="nameInput">Tên nhà sản xuất</label>
                                     <Input type="select" name="producer" id="producer"
                                         value={producer}
-                                        onChange = {e => setProducer(e.target.value)}
+                                        onChange={e => setProducer(e.target.value)}
                                     >
-                                        <option value="Hợp tác xã sản xuất chè Phìn Hồ">Hợp tác xã sản xuất chè Phìn Hồ</option>
-                                        <option value="Hợp tác xã sản xuất chè Phìn Hồ">Hợp tác xã sản xuất chè Phìn Hồ</option>
-                                        <option value="Hợp tác xã sản xuất chè Phìn Hồ">Hợp tác xã sản xuất chè Phìn Hồ</option>
+                                        {
+                                            renderProducers()
+                                        }
                                     </Input>
                                 </div>
                             </Col>
@@ -126,9 +154,9 @@ function ProductForm({ id }) {
                                     Hình ảnh sản phẩm
                             </div>
                                 <div className="imageContainer">
-                                    <ImageHolder src="/images/demo.png" index={"1"} />
-                                    <ImageHolder src="/images/demo.png" index={"2"} />
-                                    <ImageHolder src="/images/demo.png" index={"3"} />
+                                    <ImageHolder src="/images/demo.png"/>
+                                    <ImageHolder src="/images/demo.png"/>
+                                    <ImageHolder src="/images/demo.png"/>
                                     <AddImageComponent />
                                 </div>
                             </div>
@@ -139,9 +167,9 @@ function ProductForm({ id }) {
                                     Hình ảnh quá trình sản xuất
                             </div>
                                 <div className="imageContainer">
-                                    <ImageHolder src="/images/demo.png" index={1} />
-                                    <ImageHolder src="/images/demo.png" index={2} />
-                                    <ImageHolder src="/images/demo.png" index={3} />
+                                    <ImageHolder src="/images/demo.png"/>
+                                    <ImageHolder src="/images/demo.png"/>
+                                    <ImageHolder src="/images/demo.png"/>
                                     <AddImageComponent />
                                 </div>
                             </div>
@@ -180,10 +208,10 @@ function ProductForm({ id }) {
                                 <div className="inputContainer">
                                     <div className="nameInput">Hình ảnh chứng nhận sản phẩm OCOP</div>
                                     {
-                                        (image !== "")
-                                            ?
-                                            <ImageHolder src={image} />
-                                            :
+                                        // (image !== "")
+                                        //     ?
+                                        //     <ImageHolder src={image} />
+                                        //     :
                                             <AddImageComponent />
                                     }
                                 </div>

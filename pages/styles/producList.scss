@@ -1,8 +1,14 @@
+.cellRow{
+    border-bottom: 2px solid #f7f8fc;
+    &:hover{
+        background-color: #F0F0F0;
+    }
+}
 .cellTable {
     height: 100%;
     vertical-align: middle !important;
     padding: 18px 20px !important;
-    border-bottom: 2px solid #f7f8fc;
+    border: none;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -68,6 +74,12 @@
 .cellTable .icon {
     width: 19px;
     height: auto;
+}
+.cellTable.delete, .cellTable.edit{
+    cursor: pointer;
+    &:hover{
+        background-color: #f7f8fc;
+    }
 }
 .pageOption{
     display: flex;

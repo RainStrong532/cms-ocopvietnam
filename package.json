@@ -31,6 +31,7 @@
         "reactstrap": "^8.8.1",
         "skeleton": "^0.1.2",
         "swr": "^0.4.1",
+        "uuid": "^8.3.2",
         "validator": "^13.5.2"
     }
 }

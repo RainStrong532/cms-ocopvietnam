@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Router, { useRouter } from 'next/router'
-import { useAuth } from '../../../src/context/auth';
 import { SideBarData } from '../../../constants';
+import { useAuth } from '../../../src/contexts/auth';
 
 function SideBarComponent({ }) {
     const [modal, setModal] = React.useState(false);
@@ -15,12 +15,7 @@ function SideBarComponent({ }) {
             (index !== SideBarData.length - 1)
                 ?
                 <li key={index} onClick={() => {
-                    if (typeof window !== "undefined") {
-                        console.log('====================================');
-                        console.log(item.type);
-                        console.log('====================================');
-                        router.push(item.type)
-                    }
+                    router.push(item.type)
                 }}
                     className={(typeof window !== undefined) ? (window.location.pathname.startsWith(item.type)) ? "active" : "" : ""}
                 >

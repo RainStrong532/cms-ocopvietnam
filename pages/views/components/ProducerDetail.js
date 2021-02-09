@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { getProducerById } from '../../../src/services/Api';
@@ -12,6 +13,8 @@ function ProducerDetail({ id }) {
     const [email, setEmail] = React.useState("");
     const [representative, setRepresentative] = React.useState("");
 
+    const router = useRouter();
+
     useEffect(() => {
         (async () => {
             let res = await getProducerById({ id: id });
@@ -21,13 +24,14 @@ function ProducerDetail({ id }) {
                 setAddress(res.address);
                 setEmail(res.email);
                 setRepresentative(res.representative);
+                setImage(res.image)
             }
         })();
     }, [])
 
     return (
         <div className="content">
-            <SearchHeader title={"Xem chi tiết nhà sản xuất"} edit={true} pathname={"/producer/edit/"+id}/>
+            <SearchHeader title={"Xem chi tiết nhà sản xuất"} edit={true} pathname={"/producer/edit/"+id} router={router}/>
             <div className="productForm">
                 <div className="section">
                     <div className="title">

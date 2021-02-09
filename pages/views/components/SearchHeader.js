@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button, Table } from 'reactstrap';
-import { useRouter } from 'next/router'
 
-function SearchHeader({ title, pathname, edit }) {
-    const router = useRouter();
+function SearchHeader({ title, pathname, edit, router}) {
+    const [textSearch, setTextSeach] = useState("");
     const onClickBack = () => {
         router.back();
+    }
+    const onSearch = () => {
+        if(router){
+            const params = router.query;
+            const pathname = router.pathname;
+            
+            if(textSearch){
+                params.search = textSearch;
+            }
+            router.push({
+                pathname: pathname,
+                query: params
+            })
+        }
     }
     return (
         <div className="header headerSearch">
@@ -29,8 +42,19 @@ function SearchHeader({ title, pathname, edit }) {
                     !edit
                         ?
                         <div className="search">
-                            <img src="/images/search.png" alt="search icon" />
-                            <input type="text" placeholder="Tìm kiếm" />
+                            <img src="/images/search.png" alt="search icon"
+                                onClick={onSearch} 
+                            />
+                            <input type="text" placeholder="Tìm kiếm"
+                                onChange={e => {
+                                    setTextSeach(e.target.value);
+                                }}
+                                onKeyPress={e => {
+                                    if(e.key === "Enter"){
+                                        onSearch();
+                                    }
+                                }}
+                            />
                         </div>
                         :
                         <></>

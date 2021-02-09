@@ -139,6 +139,7 @@
                 border-radius: 5px;
                 line-height: 1.32;
                 vertical-align: middle;
+                cursor: context-menu;
             }
         }
         .inputContainer.dropdown {
@@ -275,6 +276,10 @@
         &:hover {
             transform: scale(1);
         }
+    }
+    .updateBtn{
+        right: 30px;
+        top: 5px;
     }
     .closeBtn img {
         width: 100%;

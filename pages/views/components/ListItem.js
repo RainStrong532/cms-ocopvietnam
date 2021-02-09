@@ -5,9 +5,12 @@ import SearchHeader from './SearchHeader';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 import { useRouter } from 'next/router'
 import { enableStatus } from '../../../constants';
+import { deleteProducerById, deleteProductById } from '../../../src/services/Api';
+import { useAuth } from '../../../src/contexts/auth';
 
-function ListItem({ data, title, type, header }) {
+function ListItem({ data, type, header, total, getList }) {
     const [modal, setModal] = React.useState(false);
+    const [itemDelete, setItem] = React.useState(null);
     const router = useRouter();
     const toggle = () => setModal(!modal);
     const renderHeaderTable = () => {
@@ -19,6 +22,8 @@ function ListItem({ data, title, type, header }) {
             })
         )
     }
+    const auth = useAuth();
+
     const renderStar = (star) => {
         return (
             <td className="cellTable" >
@@ -39,10 +44,10 @@ function ListItem({ data, title, type, header }) {
             return (
                 type === 0
                     ?
-                    <tr key={index}
-                        onClick={() => router.push("/product/" + item.id)}
-                    >
-                        <td className="cellTable firstCol">
+                    <tr className="cellRow" key={index}>
+                        <td className="cellTable firstCol"
+                            onClick={() => router.push("/product/" + item.id)}
+                        >
                             <div className="imageTable">
                                 {
                                     item.image
@@ -55,22 +60,24 @@ function ListItem({ data, title, type, header }) {
                             <p>{item.name}</p>
 
                         </td>
-                        <td className="cellTable">
+                        <td className="cellTable"
+
+                            onClick={() => router.push("/product/" + item.id)}
+                        >
                             {item.type}
                         </td>
                         {
                             renderStar(parseInt(item.ocop_star))
                         }
-                        <td className="cellTable">
+                        <td className="cellTable"
+
+                            onClick={() => router.push("/product/" + item.id)}
+                        >
                             {
-                                item.is_enable
-                                    ?
-                                    enableStatus._true
-                                    :
-                                    enableStatus._false
+                                enableStatus[item.status]
                             }
                         </td>
-                        <td className="cellTable"
+                        <td className="cellTable edit"
                             onClick={() => {
                                 router.push({
                                     pathname: window.location.pathname + '/edit/' + item.id,
@@ -79,18 +86,19 @@ function ListItem({ data, title, type, header }) {
                         >
                             <img className="icon" src="/images/edit.png" alt="edit" />
                         </td>
-                        <td className="cellTable"
+                        <td className="cellTable delete"
                             onClick={() => {
-                                toggle()
+                                toggle();
+                                setItem(item.id);
                             }}>
                             <img className="icon" src="/images/delete.png" alt="delete" />
                         </td>
                     </tr>
                     :
-                    <tr key={index}
-                        onClick={() => router.push("/producer/" + item.id)}
-                    >
-                        <td className="cellTable firstCol">
+                    <tr className="cellRow" key={index}>
+                        <td className="cellTable firstCol"
+                            onClick={() => router.push("/producer/" + item.id)}
+                        >
                             <div className="imageTable producerImage">
                                 {
                                     item.image
@@ -103,16 +111,22 @@ function ListItem({ data, title, type, header }) {
                             </div>
                             <p>{item.name}</p>
                         </td>
-                        <td className="cellTable">
+                        <td className="cellTable"
+                            onClick={() => router.push("/producer/" + item.id)}
+                        >
                             {item.representative}
                         </td>
-                        <td className="cellTable">
+                        <td className="cellTable"
+                            onClick={() => router.push("/producer/" + item.id)}
+                        >
                             {item.phone_number}
                         </td>
-                        <td className="cellTable">
+                        <td className="cellTable"
+                            onClick={() => router.push("/producer/" + item.id)}
+                        >
                             {item.address}
                         </td>
-                        <td className="cellTable"
+                        <td className="cellTable edit"
                             onClick={() => {
                                 router.push({
                                     pathname: window.location.pathname + '/edit/' + item.id,
@@ -121,9 +135,10 @@ function ListItem({ data, title, type, header }) {
                         >
                             <img className="icon" src="/images/edit.png" alt="edit" />
                         </td>
-                        <td className="cellTable"
+                        <td className="cellTable delete"
                             onClick={() => {
-                                toggle()
+                                toggle();
+                                setItem(item.id);
                             }}>
                             <img className="icon" src="/images/delete.png" alt="delete" />
                         </td>
@@ -133,7 +148,6 @@ function ListItem({ data, title, type, header }) {
     }
     return (
         <div>
-            <SearchHeader title={title} pathname={window.location.pathname + "/add"} />
             <div className="listItemContainer">
                 <Table responsive>
                     <thead>
@@ -146,8 +160,8 @@ function ListItem({ data, title, type, header }) {
                     </tbody>
                 </Table>
                 <div className="pageOption">
-                    <Perpage />
-                    <PaginationComponent />
+                    <Perpage router={router} />
+                    <PaginationComponent router={router} total={total} />
                 </div>
 
             </div>
@@ -157,7 +171,26 @@ function ListItem({ data, title, type, header }) {
                     Bạn có chắc muốn xóa?
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" onClick={toggle}>Đồng ý</Button>{' '}
+                    <Button color="danger" onClick={() => {
+                        (async () => {
+                            if (type === 0) {
+                                let res = await deleteProductById({ id: itemDelete, user: auth.isAuthenticated.user });
+                                if (res.id) {
+                                    getList();
+                                } else {
+                                    alert("Xóa thất bại");
+                                }
+                            } else {
+                                let res = await deleteProducerById({ id: itemDelete, user: auth.isAuthenticated.user });
+                                if (res.id) {
+                                    getList();
+                                } else {
+                                    alert("Xóa thất bại");
+                                }
+                            }
+                        })();
+                        toggle();
+                    }}>Đồng ý</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Hủy</Button>
                 </ModalFooter>
             </Modal>
