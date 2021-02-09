@@ -1,8 +1,9 @@
 export const DOMAIN =  "https://api-ocop5sao.marveltek.com/v1/"
+export const IMAGE_DOMAIN = "https://api-ocop5sao.marveltek.com/media/"
 
 export const enableStatus = {
-    _true: "Đã xét duyệt",
-    _false: "Đang chờ xét duyệt"
+    approved: "Đã xét duyệt",
+    processing: "Đang chờ xét duyệt"
 }
 
 export const headerProduct =  [
