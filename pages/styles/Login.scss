@@ -134,9 +134,11 @@ div.login {
                 margin-top: 0;
                 font-size: 14px;
                 background-color: transparent;
+                cursor: pointer;
                 &:hover {
                     box-shadow: 0 0 4px $main-color;
                     box-shadow: none;
+                    text-decoration: underline;
                 }
             }
         }

@@ -162,7 +162,7 @@ export const deleteProducerById = (data) => {
   }
   return new Promise((resolve, reject) => {
     let token = Cookies.get('token');
-    fetch(DOMAIN + 'manufacturer/' + data.id+'/', {
+    fetch(DOMAIN + 'manufacturer/' + data.id + '/', {
       headers: {
         "Content-type": "application/json",
         "Authorization": token
@@ -258,104 +258,11 @@ export const updateProducer = ({ image, ...data }) => {
       formData.append(name, data[name]);
     }
   }
-  if(image){
-    if(image.startsWith("http")){
+  if (image) {
+    if (image.startsWith("http")) {
       image = "";
     }
   }
-  return new Promise((resolve, reject) => {
-    let token = Cookies.get('token');
-    if (image && image !== "") {
-        fetch(image)
-          .then(res => res.blob())
-          .then(blob => {
-            const type = image.split(';')[0].split('/')[1];
-            formData.append("image", blob, uuidv4() + '.' + type)
-            fetch(DOMAIN + 'manufacturer/' + data.id+'/', {
-              headers: {
-                "Authorization": token,
-              },
-              method: 'PUT',
-              body: formData
-            })
-              .then((res) => {
-                return res.json();
-              })
-              .then(res => {
-                console.log("response: ", res);
-                console.log('=================formData===================');
-                console.log(JSON.stringify(formData));
-                for (var key of formData.entries()) {
-                  console.log(key[0] + ', ' + key[1]);
-                }
-                resolve(res);
-              })
-              .catch(err => {
-                console.log('=================getProducerById===================');
-                console.log(err);
-                console.log('====================================');
-                reject(err);
-              })
-          })
-    } else {
-      fetch(DOMAIN + 'manufacturer/'+data.id+'/', {
-        headers: {
-          "Authorization": token,
-        },
-        method: 'PUT',
-        body: formData
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then(res => {
-          console.log('====================================');
-          console.log("text: ", res);
-          console.log('====================================');
-          resolve(res);
-        })
-        .catch(err => {
-          console.log(err);
-          console.log('====================================');
-          reject(err);
-        })
-    }
-  })
-}
-export const uploadImage = (data) => {
-  return new Promise((resolve, reject) => {
-    let token = Cookies.get('token');
-    fetch(DOMAIN + 'image-path/', {
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": token
-      },
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(res => {
-        console.log("response: ", res);
-        resolve(res);
-      })
-      .catch(err => {
-        console.log('=================getProducerById===================');
-        console.log(err);
-        console.log('====================================');
-        reject(err);
-      })
-  })
-}
-
-export const createProduct = ({ image, ...data }) => {
-  const formData = new FormData();
-  for (const name in data) {
-    console.log(name);
-    formData.append(name, data[name]);
-  }
-
   return new Promise((resolve, reject) => {
     let token = Cookies.get('token');
     if (image && image !== "") {
@@ -364,11 +271,11 @@ export const createProduct = ({ image, ...data }) => {
         .then(blob => {
           const type = image.split(';')[0].split('/')[1];
           formData.append("image", blob, uuidv4() + '.' + type)
-          fetch(DOMAIN + 'product-info/', {
+          fetch(DOMAIN + 'manufacturer/' + data.id + '/', {
             headers: {
-              "Authorization": token
+              "Authorization": token,
             },
-            method: 'POST',
+            method: 'PUT',
             body: formData
           })
             .then((res) => {
@@ -384,85 +291,14 @@ export const createProduct = ({ image, ...data }) => {
               resolve(res);
             })
             .catch(err => {
-              console.log('====================================');
+              console.log('=================getProducerById===================');
               console.log(err);
               console.log('====================================');
               reject(err);
             })
         })
     } else {
-      fetch(DOMAIN + 'product-info/', {
-        headers: {
-          "Authorization": token
-        },
-        method: 'POST',
-        body: formData
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          console.log('====================================');
-          console.log(err);
-          console.log('====================================');
-          reject(err);
-        })
-    }
-  })
-}
-
-export const updateProduct = ({ image, ...data }) => {
-  const formData = new FormData();
-  for (const name in data) {
-    console.log(name);
-    if (name !== 'id') {
-      formData.append(name, data[name]);
-    }
-  }
-  if(image){
-    if(image.startsWith("http")){
-      image = "";
-    }
-  }
-  return new Promise((resolve, reject) => {
-    let token = Cookies.get('token');
-    if (image && image !== "") {
-        fetch(image)
-          .then(res => res.blob())
-          .then(blob => {
-            const type = image.split(';')[0].split('/')[1];
-            formData.append("image", blob, uuidv4() + '.' + type)
-            fetch(DOMAIN + 'product-info/' + data.id+'/', {
-              headers: {
-                "Authorization": token,
-              },
-              method: 'PUT',
-              body: formData
-            })
-              .then((res) => {
-                return res.json();
-              })
-              .then(res => {
-                console.log("response: ", res);
-                console.log('=================formData===================');
-                console.log(JSON.stringify(formData));
-                for (var key of formData.entries()) {
-                  console.log(key[0] + ', ' + key[1]);
-                }
-                resolve(res);
-              })
-              .catch(err => {
-                console.log('=================getProducerById===================');
-                console.log(err);
-                console.log('====================================');
-                reject(err);
-              })
-          })
-    } else {
-      fetch(DOMAIN + 'product-info/'+data.id+'/', {
+      fetch(DOMAIN + 'manufacturer/' + data.id + '/', {
         headers: {
           "Authorization": token,
         },
@@ -486,60 +322,309 @@ export const updateProduct = ({ image, ...data }) => {
     }
   })
 }
-
-export const deleteProductById = (data) => {
-  let d = {
-    is_enable: false,
-    user: data.user
+export const uploadImage = ({ image, ...data }) => {
+  const formData = new FormData();
+  for (const name in data) {
+    console.log(name);
+    if (name !== 'id') {
+      formData.append(name, data[name]);
+    }
+  }
+  if (image) {
+    if (image.startsWith("http")) {
+      image = "";
+    }
   }
   return new Promise((resolve, reject) => {
     let token = Cookies.get('token');
-    fetch(DOMAIN + 'product-info/' + data.id+'/', {
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": token
-      },
-      method: 'PUT',
-      body: JSON.stringify(d)
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(res => {
-        console.log("response: ", res);
-        resolve(res);
-      })
-      .catch(err => {
-        console.log('=================getProducerById===================');
-        console.log(err);
-        console.log('====================================');
-        reject(err);
-      })
-  })
-}
+    if (image && image !== "") {
+      fetch(image)
+        .then(res => res.blob())
+        .then(blob => {
+          const type = image.split(';')[0].split('/')[1];
+          formData.append("image", blob, uuidv4() + '.' + type)
+          fetch(DOMAIN + 'image-path/', {
+            headers: {
+              "Authorization": token
+            },
+            method: 'POST',
+            body: formData
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then(res => {
+              console.log("response: ", res);
+              resolve(res);
+            })
+            .catch(err => {
+              console.log('=================uploadImage===================');
+              console.log(err);
+              console.log('====================================');
+              reject(err);
+            })
+        })
+    }})
+  }
 
-export const getMyInfo = () => {
-  return new Promise((resolve, reject) => {
-    let token = Cookies.get('token');
-    fetch(DOMAIN + 'city/', {
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": token
-      },
-      method: 'GET',
+  export const updateImageApi = ({ image, ...data }) => {
+    const formData = new FormData();
+    for (const name in data) {
+      console.log(name);
+      if (name !== 'id') {
+        formData.append(name, data[name]);
+      }
+    }
+    if (image) {
+      if (image.startsWith("http")) {
+        image = "";
+      }
+    }
+    return new Promise((resolve, reject) => {
+      let token = Cookies.get('token');
+      if (image && image !== "") {
+        fetch(image)
+          .then(res => res.blob())
+          .then(blob => {
+            const type = image.split(';')[0].split('/')[1];
+            formData.append("image", blob, uuidv4() + '.' + type)
+            fetch(DOMAIN + 'image-path/'+data.id +'/', {
+              headers: {
+                "Authorization": token
+              },
+              method: 'PUT',
+              body: formData
+            })
+              .then((res) => {
+                return res.json();
+              })
+              .then(res => {
+                console.log("response: ", res);
+                resolve(res);
+              })
+              .catch(err => {
+                console.log('=================updateImage===================');
+                console.log(err);
+                console.log('====================================');
+                reject(err);
+              })
+          })
+      }else{
+        fetch(DOMAIN + 'image-path/'+data.id +'/', {
+          headers: {
+            "Authorization": token
+          },
+          method: 'PATCH',
+          body: formData
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then(res => {
+            console.log("response: ", res);
+            resolve(res);
+          })
+          .catch(err => {
+            console.log('=================deleteImage===================');
+            console.log(err);
+            console.log('====================================');
+            reject(err);
+          })
+      }
     })
-      .then((res) => {
-        return res.json();
+    }
+    export const createProduct = ({ certificate_img, ...data }) => {
+      const formData = new FormData();
+      for (const name in data) {
+        if (name !== "id")
+          formData.append(name, data[name]);
+      }
+      if (certificate_img) {
+        if (certificate_img.startsWith("http")) {
+          certificate_img = "";
+        }
+      }
+      return new Promise((resolve, reject) => {
+        let token = Cookies.get('token');
+        if (certificate_img && certificate_img !== "") {
+          fetch(certificate_img)
+            .then(res => res.blob())
+            .then(blob => {
+              const type = certificate_img.split(';')[0].split('/')[1];
+              formData.append("certificate_img", blob, uuidv4() + '.' + type)
+              fetch(DOMAIN + 'product-info/', {
+                headers: {
+                  "Authorization": token
+                },
+                method: 'POST',
+                body: formData
+              })
+                .then((res) => {
+                  return res.json();
+                })
+                .then(res => {
+                  console.log("response: ", res);
+                  console.log('=================formData===================');
+                  console.log(JSON.stringify(formData));
+                  for (var key of formData.entries()) {
+                    console.log(key[0] + ', ' + key[1]);
+                  }
+                  resolve(res);
+                })
+                .catch(err => {
+                  console.log('====================================');
+                  console.log(err);
+                  console.log('====================================');
+                  reject(err);
+                })
+            })
+        } else {
+          fetch(DOMAIN + 'product-info/', {
+            headers: {
+              "Authorization": token
+            },
+            method: 'POST',
+            body: formData
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then(res => {
+              resolve(res);
+            })
+            .catch(err => {
+              console.log('====================================');
+              console.log(err);
+              console.log('====================================');
+              reject(err);
+            })
+        }
       })
-      .then(res => {
-        console.log("response: ", res);
-        resolve(res);
+    }
+
+    export const updateProduct = ({ certificate_img, ...data }) => {
+      const formData = new FormData();
+      for (const name in data) {
+        console.log(name);
+        if (name !== 'id') {
+          formData.append(name, data[name]);
+        }
+      }
+      if (certificate_img) {
+        if (certificate_img.startsWith("http")) {
+          certificate_img = "";
+        }
+      }
+      return new Promise((resolve, reject) => {
+        let token = Cookies.get('token');
+        if (certificate_img && certificate_img !== "") {
+          fetch(certificate_img)
+            .then(res => res.blob())
+            .then(blob => {
+              const type = certificate_img.split(';')[0].split('/')[1];
+              formData.append("image", blob, uuidv4() + '.' + type)
+              fetch(DOMAIN + 'product-info/' + data.id + '/', {
+                headers: {
+                  "Authorization": token,
+                },
+                method: 'PUT',
+                body: formData
+              })
+                .then((res) => {
+                  return res.json();
+                })
+                .then(res => {
+                  console.log("response: ", res);
+                  console.log('=================formData===================');
+                  console.log(JSON.stringify(formData));
+                  for (var key of formData.entries()) {
+                    console.log(key[0] + ', ' + key[1]);
+                  }
+                  resolve(res);
+                })
+                .catch(err => {
+                  console.log(err);
+                  reject(err);
+                })
+            })
+        } else {
+          fetch(DOMAIN + 'product-info/' + data.id + '/', {
+            headers: {
+              "Authorization": token,
+            },
+            method: 'PUT',
+            body: formData
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then(res => {
+              console.log('====================================');
+              console.log("text: ", res);
+              console.log('====================================');
+              resolve(res);
+            })
+            .catch(err => {
+              console.log(err);
+              console.log('====================================');
+              reject(err);
+            })
+        }
       })
-      .catch(err => {
-        console.log('=================error===================');
-        console.log(err);
-        console.log('====================================');
-        reject(err);
+    }
+
+    export const deleteProductById = (data) => {
+      let d = {
+        is_enable: false,
+        user: data.user,
+        manufacturer: data.manufacturer
+      }
+      return new Promise((resolve, reject) => {
+        let token = Cookies.get('token');
+        fetch(DOMAIN + 'product-info/' + data.id + '/', {
+          headers: {
+            "Content-type": "application/json",
+            "Authorization": token
+          },
+          method: 'PUT',
+          body: JSON.stringify(d)
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then(res => {
+            console.log("response: ", res);
+            resolve(res);
+          })
+          .catch(err => {
+            console.log(err);
+            reject(err);
+          })
       })
-  })
-}
+    }
+
+    export const getMyInfo = () => {
+      return new Promise((resolve, reject) => {
+        let token = Cookies.get('token');
+        fetch(DOMAIN + 'city/', {
+          headers: {
+            "Content-type": "application/json",
+            "Authorization": token
+          },
+          method: 'GET',
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then(res => {
+            console.log("response: ", res);
+            resolve(res);
+          })
+          .catch(err => {
+            console.log('=================error===================');
+            console.log(err);
+            console.log('====================================');
+            reject(err);
+          })
+      })
+    }

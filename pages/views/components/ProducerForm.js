@@ -81,7 +81,7 @@ function ProducerForm({ id }) {
                                 <div className="inputContainer">
                                     <div className="nameInput mb-0">Logo</div>
                                     {
-                                        (image !== "" || image)
+                                        (image !== "" && image)
                                             ?
                                             <ImageHolder src={image} setImage={setImage} />
                                             :

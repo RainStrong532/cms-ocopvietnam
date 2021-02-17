@@ -67,3 +67,30 @@ export const SideBarData = [
         icon: <img className="sideBarItem" src="/images/logout.png" alt="producers" />,
     }
 ]
+
+export const productType = [
+    {
+        name: "food",
+        value: "food",
+    },
+    {
+        name: "drink",
+        value: "drink",
+    },
+    {
+        name: "herbs",
+        value: "herbs",
+    },
+    {
+        name: "cloth",
+        value: "cloth",
+    },
+    {
+        name: "keepsake",
+        value: "keepsake",
+    },
+    {
+        name: "travel",
+        value: "travel",
+    }
+]

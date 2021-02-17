@@ -32,6 +32,7 @@ $sideBarWidth: 255px;
             margin-top: 40px;
             li {
                 display: flex;
+                cursor: pointer;
                 padding: 14px 24px;
                 &:hover:not(.active) {
                     background-color: #108188;
@@ -41,7 +42,7 @@ $sideBarWidth: 255px;
                     color: #fff;
                     justify-content: left;
                     margin-left: 27px;
-                    cursor: context-menu;
+                    cursor: pointer;
                 }
             }
             .active {

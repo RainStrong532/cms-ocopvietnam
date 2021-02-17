@@ -86,7 +86,21 @@
     justify-content: flex-end;
     margin-top: 80px;
     padding-bottom: 34px;
+    align-items: center;
     .perpage{
         margin-right: 25px;
+    }
+    .pageInfo{
+        cursor: context-menu;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p{
+            color: #a9a9a9;
+            font-size: 14px;
+            margin: 0;
+            font-weight: 600;
+        }
+        margin-right: 15px;
     }
 }

@@ -18,6 +18,7 @@ function Login() {
     const {login} = useAuth();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
+
     const router = useRouter();
     let form = React.useRef(null);
     let checkBtn = React.useRef(null);
@@ -26,9 +27,7 @@ function Login() {
         form.validateAll();
 
         if (checkBtn.context._errors.length === 0) {
-            if(login(username, password)){
-                router.push('/product')
-            }
+            login(username, password);
         }
     }
     return (
@@ -75,6 +74,7 @@ function Login() {
                                                 }}
                                                 type="password"
                                                 placeholder="Mật khẩu"
+                                                autoComplete="true"
                                                 // className="form-control"
                                                 validations={[required]}
                                             />
@@ -82,7 +82,7 @@ function Login() {
                                         </div>
                                         <div className="fpContainer">
                                             <div></div>
-                                            <button className="fogot-password-btn"> Quên mật khẩu? </button>
+                                            <div className="fogot-password-btn"> Quên mật khẩu? </div>
                                         </div>
                                         <button className="btn btn-info btn-block login loginBtn" type="submit">Đăng nhập</button>
                                         <CheckButton className="checkBtn" ref={c => { checkBtn = c }} />

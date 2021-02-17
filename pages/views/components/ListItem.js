@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { enableStatus } from '../../../constants';
 import { deleteProducerById, deleteProductById } from '../../../src/services/Api';
 import { useAuth } from '../../../src/contexts/auth';
+import EmtyComponent from './EmtyComponent';
 
 function ListItem({ data, type, header, total, getList }) {
     const [modal, setModal] = React.useState(false);
@@ -89,7 +90,7 @@ function ListItem({ data, type, header, total, getList }) {
                         <td className="cellTable delete"
                             onClick={() => {
                                 toggle();
-                                setItem(item.id);
+                                setItem(item);
                             }}>
                             <img className="icon" src="/images/delete.png" alt="delete" />
                         </td>
@@ -138,7 +139,7 @@ function ListItem({ data, type, header, total, getList }) {
                         <td className="cellTable delete"
                             onClick={() => {
                                 toggle();
-                                setItem(item.id);
+                                setItem(item);
                             }}>
                             <img className="icon" src="/images/delete.png" alt="delete" />
                         </td>
@@ -156,16 +157,34 @@ function ListItem({ data, type, header, total, getList }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {renderListData()}
+                        {
+                            renderListData()
+                        }
                     </tbody>
                 </Table>
-                <div className="pageOption">
-                    <Perpage router={router} />
-                    <PaginationComponent router={router} total={total} />
-                </div>
+                {
+                    data.length === 0
+                        ?
+                        <EmtyComponent />
+                        :
+                        <></>
+                }
 
+                {
+                    data.length > 0
+                        ?
+                        <div className="pageOption">
+                            <div className="pageInfo">
+                                <p>{`${router.query.page || 1}/${Math.ceil(total / router.query.page_size || 20)}`}</p>
+                            </div>
+                            <Perpage router={router} />
+                            <PaginationComponent router={router} total={total} />
+                        </div>
+                        :
+                        <></>
+                }
             </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} centered={true}>
                 <ModalHeader toggle={toggle}>Thông báo</ModalHeader>
                 <ModalBody>
                     Bạn có chắc muốn xóa?
@@ -174,14 +193,14 @@ function ListItem({ data, type, header, total, getList }) {
                     <Button color="danger" onClick={() => {
                         (async () => {
                             if (type === 0) {
-                                let res = await deleteProductById({ id: itemDelete, user: auth.isAuthenticated.user });
+                                let res = await deleteProductById({ id: itemDelete.id, user: auth.isAuthenticated.user, manufacturer: itemDelete.manufacturer });
                                 if (res.id) {
                                     getList();
                                 } else {
                                     alert("Xóa thất bại");
                                 }
                             } else {
-                                let res = await deleteProducerById({ id: itemDelete, user: auth.isAuthenticated.user });
+                                let res = await deleteProducerById({ id: itemDelete.id, user: auth.isAuthenticated.user });
                                 if (res.id) {
                                     getList();
                                 } else {

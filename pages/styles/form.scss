@@ -24,7 +24,7 @@
 }
 .headerSearch {
     justify-content: space-between;
-    .headerCnt{
+    .headerCnt {
         display: flex;
     }
     .title {
@@ -51,13 +51,13 @@
                 margin: 0;
             }
         }
-        .editItem{
+        .editItem {
             text-transform: uppercase;
             background-color: $main-color;
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            img{
+            img {
                 width: 24px;
                 height: auto;
                 margin: 0;
@@ -128,7 +128,7 @@
                 cursor: context-menu;
                 margin-bottom: 10px;
             }
-            .detail{
+            .detail {
                 color: $main-color;
             }
             .inpputContent {
@@ -220,6 +220,7 @@
     position: relative;
     margin-top: 10px;
     overflow: hidden;
+    cursor: pointer;
     .image {
         position: absolute;
         width: auto;
@@ -235,6 +236,7 @@
         left: 0;
         opacity: 0;
         z-index: 10;
+        cursor: pointer;
     }
     .circle {
         width: 57.82px;
@@ -254,6 +256,8 @@
     border: 1.5px solid #dfdfdf;
     background-color: #ffffff;
     margin-right: 22px;
+    position: relative;
+
     .overlay {
         position: absolute;
         width: 100%;
@@ -263,29 +267,32 @@
         z-index: 5;
         border-radius: 8px;
     }
-    .closeBtn {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
+    .btnContainer {
         position: absolute;
+        display: flex;
+        justify-content: space-between;
         top: 5px;
         right: 5px;
         z-index: 20;
-        transform: scale(0.8);
-        transition: transform 0.2s ease;
-        &:hover {
-            transform: scale(1);
+        .closeBtn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transform: scale(0.8);
+            transition: transform 0.2s ease;
+            &:hover {
+                transform: scale(1);
+            }
         }
-    }
-    .updateBtn{
-        right: 30px;
-        top: 5px;
-    }
-    .closeBtn img {
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-        display: none;
+        .updateBtn {
+            cursor: pointer;
+        }
+        .closeBtn img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            display: none;
+        }
     }
     &:hover {
         .overlay {

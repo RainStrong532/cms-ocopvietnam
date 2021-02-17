@@ -28,18 +28,24 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const login = async (username, password) => {
-        const data = await loginApi(username, password)
-        if (data.token) {
-            console.log("Got token")
-            Cookies.set('token', data.token, { expires: 60 })
-            let user = await getMyInfo();
-            if (user.id) {
-                setUser(user);
-                return true;
+        try {
+            const data = await loginApi(username, password);
+            if (data.token) {
+                console.log("Got token")
+                Cookies.set('token', data.token, { expires: 60 })
+                let user = await getMyInfo();
+                if (user.id) {
+                    setUser(user);
+                    return true;
+                }
+                return false;
             }
+            alert("Tài khoản hoặc mật khẩu không chính xác!");
             return false;
+        } catch (err) {;
+            alert("Tài khoản hoặc mật khẩu không chính xác!");
+            return false
         }
-        return false;
     }
 
     const logout = () => {
@@ -72,11 +78,15 @@ export const ProtectRoute = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();
     const [windowReady, setWindowReady] = useState(false);
     useEffect(() => {
-        console.log("window.innerHeight", window.innerHeight, isAuthenticated, loading, windowReady);
+        console.log(isAuthenticated, loading, windowReady);
         setWindowReady(true);
     }, [windowReady])
     if (!windowReady || loading) {
-        return <LoadingScreen />;
+        return (
+            <div className="loadingContainer">
+                <LoadingScreen />
+            </div>
+        );
     } else {
         if ((!isAuthenticated && window.location.pathname !== '/login')) {
             gotoLogin();
@@ -86,5 +96,9 @@ export const ProtectRoute = ({ children }) => {
             return children;
         }
     }
-    return <LoadingScreen />;
+    return (
+        <div className="loadingContainer">
+            <LoadingScreen />
+        </div>
+    );
 };

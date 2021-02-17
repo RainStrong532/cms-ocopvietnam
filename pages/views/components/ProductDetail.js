@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button, Input } from 'reactstrap';
+import { DOMAIN, IMAGE_DOMAIN } from '../../../constants';
 import { getProductById } from '../../../src/services/Api';
 import ImageHolder from './ImageHolder';
 import SearchHeader from './SearchHeader';
@@ -15,6 +16,9 @@ function ProductDetail({ id }) {
     const [startDate, setStartDate] = React.useState("");
     const [exprire, setExprire] = React.useState("");
     const [certification, setCertification] = React.useState("");
+    const [productImages, setProductImages] = React.useState([]);
+    const [productionImages, setProductionImages] = React.useState([]);
+
     const router = useRouter();
     useEffect(() => {
         (async () => {
@@ -23,31 +27,37 @@ function ProductDetail({ id }) {
                 setName(res.name);
                 setCountStar(res.ocop_star);
                 setImage(res.certificate_img);
-                setProducer(res.manufacturer.name);
+                setProducer(res.manufacturer_name);
                 setProduct(res.description);
                 setStory(res.story);
                 setExprire(res.expiry_date);
                 setStartDate(res.issued_on)
                 setCertification(res.ocop_certificate_number);
+                setProductionImages(res.image_production);
+                setProductImages(res.image_product);
             }
         })();
     }, [])
-
-    function readURL(event) {
-        if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                setImage(e.target.result)
-            };
-
-            reader.readAsDataURL(event.target.files[0]);
+    const renderListImage = (list, setList) => {
+        if (list.length === 0) {
+            return (
+                <ImageHolder src="" readOnly={true} />
+            )
         }
+        return list.map((item, index) => {
+            console.log('====================================');
+            console.log("image item: ", item);
+            console.log('====================================');
+            return(
+            <ImageHolder src={IMAGE_DOMAIN + item.image} key={index} readOnly={true}
+            />
+            )
+        })
     }
 
     return (
         <div className="content">
-            <SearchHeader title={"Xem chi tiết sản phẩm"} edit={true} pathname={"/product/edit/"+id} router={router}/>
+            <SearchHeader title={"Xem chi tiết sản phẩm"} edit={true} pathname={"/product/edit/" + id} router={router} />
             <div className="productForm">
                 <div className="section">
                     <div className="title">
@@ -92,9 +102,9 @@ function ProductDetail({ id }) {
                                     Hình ảnh sản phẩm
                             </div>
                                 <div className="imageContainer">
-                                    <ImageHolder src="/images/demo.png" index={"1"} readOnly={true} />
-                                    <ImageHolder src="/images/demo.png" index={"2"} readOnly={true} />
-                                    <ImageHolder src="/images/demo.png" index={"3"} readOnly={true} />
+                                    {
+                                        renderListImage(productImages, setProductImages)
+                                    }
                                 </div>
                             </div>
                         </Col>
@@ -104,9 +114,9 @@ function ProductDetail({ id }) {
                                     Hình ảnh quá trình sản xuất
                             </div>
                                 <div className="imageContainer">
-                                    <ImageHolder src="/images/demo.png" index={1} readOnly={true}/>
-                                    <ImageHolder src="/images/demo.png" index={2} readOnly={true} />
-                                    <ImageHolder src="/images/demo.png" index={3} readOnly={true} />
+                                    {
+                                        renderListImage(productionImages, setProductionImages)
+                                    }
                                 </div>
                             </div>
                         </Col>
@@ -131,7 +141,7 @@ function ProductDetail({ id }) {
                                 <div className="inputContainer">
                                     <div className="nameInput detail">Hình ảnh chứng nhận sản phẩm OCOP</div>
                                     {
-                                      <ImageHolder src={image} readOnly={true} />
+                                        <ImageHolder src={image} readOnly={true} />
                                     }
                                 </div>
                             </Col>

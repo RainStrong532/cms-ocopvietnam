@@ -1,4 +1,10 @@
 .pg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ul{
+        margin: 0;
+    }
 .pgItem {
     margin: 0 5.5px;
     .pgLink {

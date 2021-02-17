@@ -12,7 +12,8 @@ function Producers({ router }) {
     const [isLoading, setLoading] = useState(false);
     const [listProducer, setListProducer] = useState([]);
     const [total, setTotal] = useState(0);
-    const getProducers = async () => {
+    const getProducers = () => {
+        (async () => {
         setLoading(true);
         let page = router.query.page || 1;
         let page_size = router.query.page_size || 20;
@@ -28,6 +29,7 @@ function Producers({ router }) {
             setTotal(res.count);
         }
         setLoading(false);
+    })();
     }
     const startLoading = async () => {
         setLoading(true);
