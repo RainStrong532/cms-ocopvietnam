@@ -175,7 +175,7 @@ function ListItem({ data, type, header, total, getList }) {
                         ?
                         <div className="pageOption">
                             <div className="pageInfo">
-                                <p>{`${router.query.page || 1}/${Math.ceil(total / router.query.page_size || 20)}`}</p>
+                                <p>{`${router.query.page || 1}/${Math.ceil(total / (router.query.page_size || 20))}`}</p>
                             </div>
                             <Perpage router={router} />
                             <PaginationComponent router={router} total={total} />

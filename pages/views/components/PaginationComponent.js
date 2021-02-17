@@ -2,7 +2,7 @@ import React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 function PaginationComponent(props) {
-    const currentPage = props.router ? props.router.query.page : 1;
+    const currentPage = props.router.query.page ? props.router.query.page : 1;
     const pagginationHandler = (type) => {
         const currentPath = props.router.pathname;
         const currentQuery = props.router.query;
@@ -26,7 +26,7 @@ function PaginationComponent(props) {
                 break;
             default:
                 {
-                    (currentQuery.page < Math.ceil(props.total / currentQuery.page_size))
+                    (currentPage < Math.ceil(props.total / currentQuery.page_size))
                         ?
                         currentQuery.page += 1
                         :
@@ -47,6 +47,7 @@ function PaginationComponent(props) {
     currentQuery.page = currentQuery.page ? parseInt(currentQuery.page) : 1
     currentQuery.page_size = currentQuery.page_size ? parseInt(currentQuery.page_size) : 20
     const canGoFirst = (currentQuery.page === 1);
+    console.log(props.total, currentQuery.page_size, currentPage);
     return (
         <Pagination className="pg">
             <PaginationItem className="pgItem icon"
@@ -100,11 +101,11 @@ function PaginationComponent(props) {
 
             <PaginationItem className="pgItem icon"
                 onClick={() => {
-                    if((currentPage < Math.ceil(props.total / currentQuery.page_size)))
+                    if((Math.ceil(props.total / currentQuery.page_size) > currentPage))
                     pagginationHandler(1)
                 }}
                 title="Trang sau"
-                disabled={(currentPage < Math.ceil(props.total / currentQuery.page_size)) ? false : true}
+                disabled={(Math.ceil(props.total / currentQuery.page_size) > currentPage) ? false : true}
             >
                 <PaginationLink className="pgLink" href="">
                     <img src="/images/next.png" alt="next" />
@@ -112,11 +113,11 @@ function PaginationComponent(props) {
             </PaginationItem>
             <PaginationItem className="pgItem icon"
                 onClick={() => {
-                    if((Math.ceil(props.total / currentQuery.page_size) > 1))
+                    if((Math.ceil(props.total / currentQuery.page_size) > currentPage))
                     pagginationHandler(4)
                 }}
                 title="Trang cuối"
-                disabled={(Math.ceil(props.total / currentQuery.page_size) > 1) ? false : true}
+                disabled={(Math.ceil(props.total / currentQuery.page_size) > currentPage) ? false : true}
             >
                 <PaginationLink className="pgLink" href="">
                     <img src="/images/end.png" alt="last" />
