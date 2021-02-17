@@ -7,6 +7,7 @@ import { createProducer, getProducerById, getProducers, updateProducer } from '.
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';
+import LoadingScreen from './LoadingScreen';
 
 function ProducerForm({ id }) {
     const [image, setImage] = React.useState("");
@@ -19,10 +20,6 @@ function ProducerForm({ id }) {
     const router = useRouter();
 
     const auth = useAuth();
-
-    console.log('====================================');
-    console.log("auth: ", auth);
-    console.log('====================================');
     useEffect(() => {
         (async () => {
             if (id) {

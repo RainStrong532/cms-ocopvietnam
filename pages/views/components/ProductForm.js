@@ -24,14 +24,12 @@ function ProductForm({ id }) {
     const [producers, setProducers] = useState([]);
     const [productImages, setProductImages] = useState([]);
     const [productionImages, setProductionImages] = useState([]);
-    const [isLoading, setLoading] = useState(false);
 
     const router = useRouter();
 
     useEffect(() => {
         (async () => {
             if (id) {
-                setLoading(true);
                 let res = await getProductById({ id: id });
                 if (res.id) {
                     setName(res.name);
@@ -47,16 +45,13 @@ function ProductForm({ id }) {
                     setProductImages(res.image_product);
                     setProductionImages(res.image_production);
                 }
-                setLoading(false);
             }
             if (!firstLoad) {
-                setLoading(true);
                 let res = await getProducers();
                 if (res.count) {
                     setProducers(res.results);
                     setProducer(res.results.length > 0 ? res.results[0] : "");
                 }
-                setLoading(false);
             }
         })();
     }, [])
@@ -118,46 +113,46 @@ function ProductForm({ id }) {
     }
 
     const submitImage = async (product) => {
-            for (const item of productImages) {
-                let data = {
-                    product: product.id,
-                    type: "product",
-                }
-                if (item.isUpdate) {
-                    data.id = item.id;
-                    data.is_enable = true;
-                    data.image = item.image;
-                    const res = await updateImageApi(data);
-                } else if (item.isDelete) {
-                    data.id = item.id;
-                    data.is_enable = false;
-                    const res = await updateImageApi(data);
-                } else if (!item.id && item.image && item.image !== "" && !item.image.startsWith("http")) {
-                    data.is_enable = true;
-                    data.image = item.image;
-                    const res = await uploadImage(data);
-                }
+        for (const item of productImages) {
+            let data = {
+                product: product.id,
+                type: "product",
             }
-            for (const item of productionImages) {
-                let data = {
-                    product: product.id,
-                    type: "production",
-                }
-                if (item.isUpdate) {
-                    data.id = item.id;
-                    data.is_enable = true;
-                    data.image = item.image;
-                    const res = await updateImageApi(data);
-                } else if (item.isDelete) {
-                    data.id = item.id;
-                    data.is_enable = false;
-                    const res = await updateImageApi(data);
-                } else if (!item.id && item.image && item.image !== "" && !item.image.startsWith("http")) {
-                    data.is_enable = true;
-                    data.image = item.image;
-                    const res = await uploadImage(data);
-                }
+            if (item.isUpdate) {
+                data.id = item.id;
+                data.is_enable = true;
+                data.image = item.image;
+                const res = await updateImageApi(data);
+            } else if (item.isDelete) {
+                data.id = item.id;
+                data.is_enable = false;
+                const res = await updateImageApi(data);
+            } else if (!item.id && item.image && item.image !== "" && !item.image.startsWith("http")) {
+                data.is_enable = true;
+                data.image = item.image;
+                const res = await uploadImage(data);
             }
+        }
+        for (const item of productionImages) {
+            let data = {
+                product: product.id,
+                type: "production",
+            }
+            if (item.isUpdate) {
+                data.id = item.id;
+                data.is_enable = true;
+                data.image = item.image;
+                const res = await updateImageApi(data);
+            } else if (item.isDelete) {
+                data.id = item.id;
+                data.is_enable = false;
+                const res = await updateImageApi(data);
+            } else if (!item.id && item.image && item.image !== "" && !item.image.startsWith("http")) {
+                data.is_enable = true;
+                data.image = item.image;
+                const res = await uploadImage(data);
+            }
+        }
     }
 
     const onSubmit = () => {
@@ -238,10 +233,6 @@ function ProductForm({ id }) {
         )
     }
     return (
-        isLoading
-        ?
-        <LoadingScreen></LoadingScreen>
-        :
         <div className="content">
             <Header title={id ? "Cập nhật thông tin sản phẩm" : "Thêm sản phẩm"} />
             <div className="productForm">
