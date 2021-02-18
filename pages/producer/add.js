@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../views/components/Layout';
-import ProducerForm from '../views/components/ProducerForm';
+import Layout from './../../src/views/components/Layout';
+import ProducerForm from './../../src/views/components/ProducerForm';
 
 function add() {
     return (

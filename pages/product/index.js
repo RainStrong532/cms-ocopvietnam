@@ -1,7 +1,6 @@
 import React from 'react';
-import Products from '../views/components/Products';
-import Layout from '../views/components/Layout';
-import { useRouter } from 'next/router';
+import Products from './../../src/views/components/Products';
+import Layout from './../../src/views/components/Layout';
 
 function products() {
     return (

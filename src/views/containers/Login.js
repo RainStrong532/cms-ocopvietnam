@@ -1,11 +1,12 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, ModalHeader, ModalBody, ModalFooter, Button, Modal } from 'reactstrap';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmpty } from 'validator'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import { useAuth } from '../../../src/contexts/auth';
+import LoadingOverlay from '../components/LoadingOverlay';
 
 const required = (value) => {
     if (isEmpty(value)) {
@@ -15,19 +16,29 @@ const required = (value) => {
 
 
 function Login() {
-    const {login} = useAuth();
+    const { login } = useAuth();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
+
+    const [isLoading, setLoading] = React.useState(false);
+    const [modal, setModal] = React.useState(false);
+
+    const toggle = () => {
+        setModal(!modal);
+    }
 
     const router = useRouter();
     let form = React.useRef(null);
     let checkBtn = React.useRef(null);
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         form.validateAll();
 
         if (checkBtn.context._errors.length === 0) {
-            login(username, password);
+            setLoading(true);
+            await login(username, password);
+            setLoading(false);
+            toggle();
         }
     }
     return (
@@ -35,8 +46,8 @@ function Login() {
             <div className="login">
                 <Container>
                     <Row>
-                        <Col xs={12} sm={3} xl={7}></Col>
-                        <Col xs={12} sm={6} xl={5} className="horizontal-align">
+                        <Col className="inner" xs={1} md={3} xl={7}></Col>
+                        <Col xs={12} sm={10}  md={6} xl={5} className="horizontal-align">
                             <div className="login-section" >
                                 <div className="login-header">
                                     <img src="./ntm-logo.png" alt="logo" />
@@ -92,6 +103,16 @@ function Login() {
                         </Col>
                     </Row>
                 </Container>
+                <LoadingOverlay open={isLoading} />
+                <Modal isOpen={modal} toggle={toggle} centered={true}>
+                    <ModalHeader toggle={toggle}>Thông báo</ModalHeader>
+                    <ModalBody>
+                        Đăng nhập thất bại
+                </ModalBody>
+                    <ModalFooter>
+                        <Button color="danger" onClick={toggle}>OK</Button>
+                    </ModalFooter>
+                </Modal>
             </div>
         </>
     );

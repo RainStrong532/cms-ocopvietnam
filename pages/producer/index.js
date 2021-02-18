@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../views/components/Layout';
-import Producers from '../views/components/Producers';
+import Layout from './../../src/views/components/Layout';
+import Producers from './../../src/views/components/Producers';
 
 function producer() {
     return (

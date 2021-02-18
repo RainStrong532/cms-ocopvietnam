@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Table } from 'reactstrap';
 
-function SearchHeader({ title, pathname, edit, router}) {
-    const [textSearch, setTextSeach] = useState("");
+function SearchHeader({ title, pathname, edit, router }) {
+    const [showTitle, setShowTitle] = useState(true);
+    const [width, setWidth] = useState(window.innerWidth);
     const onClickBack = () => {
         router.back();
     }
-    const onSearch = () => {
-        if(router){
+    window.onresize = () => {
+        setWidth(window.innerWidth);
+        if(width >= 960){
+            setShowTitle(true);
+        }
+    }
+    const onSearch = (textSearch) => {
+        if (router) {
             const params = router.query;
             const pathname = router.pathname;
-            
-            if(textSearch){
+            let newParams = {};
+            if (textSearch && textSearch !== "") {
                 params.search = textSearch;
                 params.page = 1;
+                newParams = { ...params };
+            } else {
+                for (const i in params) {
+                    if (i !== "search")
+                        newParams[i] = params[i];
+                }
             }
             router.push({
                 pathname: pathname,
-                query: params
+                query: newParams
             })
+        }
+    }
+    const onSearchOpen = () => {
+        if (width < 960) {
+            setShowTitle(!showTitle);
         }
     }
     return (
@@ -36,24 +54,24 @@ function SearchHeader({ title, pathname, edit, router}) {
                         :
                         <></>
                 }
-                <div className="title">{title}</div>
+                <div className={`title ${(showTitle) ? "" : "display-none"}`}
+                >{title}</div>
             </div>
-            <div className="extentions">
+            <div className={`extentions ${showTitle ? "" : "open"}`}>
                 {
                     !edit
                         ?
-                        <div className="search">
+                        <div className="search"
+                        >
                             <img src="/images/search.png" alt="search icon"
-                                onClick={onSearch} 
+                                onClick={
+                                    onSearchOpen
+                                }
                             />
                             <input type="text" placeholder="Tìm kiếm"
                                 onChange={e => {
-                                    setTextSeach(e.target.value);
-                                }}
-                                onKeyPress={e => {
-                                    if(e.key === "Enter"){
-                                        onSearch();
-                                    }
+                                    // setTextSeach(e.target.value.trim());
+                                    onSearch(e.target.value.trim());
                                 }}
                             />
                         </div>
@@ -66,9 +84,11 @@ function SearchHeader({ title, pathname, edit, router}) {
                     }}
                 >
                     <img src={edit ? "/images/pencil.png" : "/images/whitePlus.png"} alt="icon" />
-                    {
-                        edit ? "chỉnh sửa" : "thêm mới"
-                    }
+                    <p>
+                        {
+                            edit ? "chỉnh sửa" : "thêm mới"
+                        }
+                    </p>
                 </Button>
             </div>
         </div>

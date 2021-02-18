@@ -6,6 +6,7 @@ import { createProduct, getProducers, getProductById, updateProduct, updateImage
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';
+import LoadingOverlay from './LoadingOverlay';
 import LoadingScreen from './LoadingScreen';
 
 let firstLoad = false;
@@ -24,6 +25,8 @@ function ProductForm({ id }) {
     const [producers, setProducers] = useState([]);
     const [productImages, setProductImages] = useState([]);
     const [productionImages, setProductionImages] = useState([]);
+
+    const [isLoading, setLoading] = useState(false);
 
     const router = useRouter();
 
@@ -175,19 +178,25 @@ function ProductForm({ id }) {
                 data.certificate_img = image
             }
             if (id) {
+                setLoading(true);
                 const res = await updateProduct(data);
                 if (res.id) {
                     await submitImage(res);
+                    setLoading(false);
                     router.push("/product/" + res.id);
                 } else {
+                    setLoading(false);
                     alert("Cập nhật sản phẩm thất bại!");
                 }
             } else {
+                setLoading(true);
                 const res = await createProduct(data);
                 if (res.id) {
                     await submitImage(res);
+                    setLoading(false);
                     router.push("/product/" + res.id);
                 } else {
+                    setLoading(false);
                     alert("Tạo sản phẩm thất bại!");
                 }
             }
@@ -198,7 +207,7 @@ function ProductForm({ id }) {
         return (
             productType.map((item, index) => {
                 return (
-                    <option value={item.name} key={index}>{item.name}</option>
+                    <option value={item.value} key={index}>{item.name}</option>
                 )
             })
         )
@@ -431,6 +440,7 @@ function ProductForm({ id }) {
                     </div>
                 </div>
             </div>
+            <LoadingOverlay open={isLoading} />
         </div>
     );
 }

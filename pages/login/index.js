@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../views/containers/Login';
+import Login from './../../src/views/containers/Login';
 
 function login() {
     return (

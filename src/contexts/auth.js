@@ -3,7 +3,8 @@ import Cookies from 'js-cookie'
 import Router, { useRouter } from 'next/router'
 
 import { getMyInfo, loginApi } from '../services/Api';
-import LoadingScreen from '../../pages/views/components/LoadingScreen';
+import LoadingScreen from '../views/components/LoadingScreen';
+
 
 
 const AuthContext = createContext({});
@@ -40,10 +41,8 @@ export const AuthProvider = ({ children }) => {
                 }
                 return false;
             }
-            alert("Tài khoản hoặc mật khẩu không chính xác!");
             return false;
         } catch (err) {;
-            alert("Tài khoản hoặc mật khẩu không chính xác!");
             return false
         }
     }

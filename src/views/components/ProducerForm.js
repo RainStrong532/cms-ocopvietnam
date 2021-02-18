@@ -7,7 +7,7 @@ import { createProducer, getProducerById, getProducers, updateProducer } from '.
 import AddImageComponent from './AddImageComponent';
 import Header from './Header';
 import ImageHolder from './ImageHolder';
-import LoadingScreen from './LoadingScreen';
+import LoadingOverlay from './LoadingOverlay';
 
 function ProducerForm({ id }) {
     const [image, setImage] = React.useState("");
@@ -16,6 +16,8 @@ function ProducerForm({ id }) {
     const [address, setAddress] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [representative, setRepresentative] = React.useState("");
+
+    const [isLoading, setLoading] = useState(false);
 
     const router = useRouter();
 
@@ -80,7 +82,7 @@ function ProducerForm({ id }) {
                                     {
                                         (image !== "" && image)
                                             ?
-                                            <ImageHolder src={image} setImage={setImage} />
+                                            <ImageHolder src={image} setImage={setImage} canDelete={false}/>
                                             :
                                             <AddImageComponent
                                                 setImage={setImage}
@@ -141,17 +143,23 @@ function ProducerForm({ id }) {
                                             }
                                         }
                                         if (!id) {
+                                            setLoading(true);
                                             let res = await createProducer(data);
                                             if(res.id){
+                                                setLoading(false);
                                                 router.push(`/producer/${res.id}`);
                                             }else{
+                                                setLoading(false);
                                                 alert("Thêm mới thất bại");
                                             }
                                         } else {
+                                            setLoading(true);
                                             let res = await updateProducer(data);
                                             if(res.id){
+                                                setLoading(false);
                                                 router.push(`/producer/${res.id}`);
                                             }else{
+                                                setLoading(false);
                                                 alert("Cập nhật thất bại");
                                             }
                                         }
@@ -171,6 +179,7 @@ function ProducerForm({ id }) {
                     </div>
                 </div>
             </div>
+            <LoadingOverlay open={isLoading} />
         </div>
     );
 }

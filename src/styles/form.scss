@@ -34,7 +34,7 @@
         display: flex;
         align-items: center;
         letter-spacing: 0.4px;
-
+        white-space: nowrap;
         color: #595959;
     }
     .extentions {
@@ -45,10 +45,17 @@
             background-color: $main-color;
             margin-left: 14px;
             text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             img {
                 height: 42px;
                 width: auto;
                 margin: 0;
+            }
+            p{
+                margin: 0;
+                white-space: nowrap;
             }
         }
         .editItem {
@@ -62,6 +69,9 @@
                 height: auto;
                 margin: 0;
                 margin-right: 10px;
+            }
+            p{
+                margin: 0;
             }
         }
         .search {
@@ -316,7 +326,6 @@
     flex-wrap: wrap;
 }
 .dia {
-    max-width: 70vw !important;
     position: relative;
     .modal-content {
         background-color: #f7f8fc;

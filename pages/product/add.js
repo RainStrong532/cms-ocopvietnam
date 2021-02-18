@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../views/components/Layout';
-import ProductForm from '../views/components/ProductForm';
+import Layout from './../../src/views/components/Layout';
+import ProductForm from './../../src/views/components/ProductForm';
 
 function add() {
     return (

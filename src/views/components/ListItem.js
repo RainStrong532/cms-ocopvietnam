@@ -4,7 +4,7 @@ import Perpage from './Perpage';
 import SearchHeader from './SearchHeader';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 import { useRouter } from 'next/router'
-import { enableStatus } from '../../../constants';
+import { enableStatus, headerProduct, productTypes } from '../../../constants';
 import { deleteProducerById, deleteProductById } from '../../../src/services/Api';
 import { useAuth } from '../../../src/contexts/auth';
 import EmtyComponent from './EmtyComponent';
@@ -27,7 +27,9 @@ function ListItem({ data, type, header, total, getList }) {
 
     const renderStar = (star) => {
         return (
-            <td className="cellTable" >
+            <td className="cellTable" 
+                type={type}
+            >
                 {
                     Array.from({ length: star }).map((_, index) => (
                         <img key={index}
@@ -47,6 +49,7 @@ function ListItem({ data, type, header, total, getList }) {
                     ?
                     <tr className="cellRow" key={index}>
                         <td className="cellTable firstCol"
+                            type={type}
                             onClick={() => router.push("/product/" + item.id)}
                         >
                             <div className="imageTable">
@@ -62,16 +65,16 @@ function ListItem({ data, type, header, total, getList }) {
 
                         </td>
                         <td className="cellTable"
-
+                            type={type}
                             onClick={() => router.push("/product/" + item.id)}
                         >
-                            {item.type}
+                            {item.type ? productTypes[item.type] : ""}
                         </td>
                         {
                             renderStar(parseInt(item.ocop_star))
                         }
                         <td className="cellTable"
-
+                            type={type}
                             onClick={() => router.push("/product/" + item.id)}
                         >
                             {
@@ -79,6 +82,7 @@ function ListItem({ data, type, header, total, getList }) {
                             }
                         </td>
                         <td className="cellTable edit"
+                            type={type}
                             onClick={() => {
                                 router.push({
                                     pathname: window.location.pathname + '/edit/' + item.id,
@@ -88,6 +92,7 @@ function ListItem({ data, type, header, total, getList }) {
                             <img className="icon" src="/images/edit.png" alt="edit" />
                         </td>
                         <td className="cellTable delete"
+                            type={type}
                             onClick={() => {
                                 toggle();
                                 setItem(item);
@@ -98,6 +103,7 @@ function ListItem({ data, type, header, total, getList }) {
                     :
                     <tr className="cellRow" key={index}>
                         <td className="cellTable firstCol"
+                            type={type}
                             onClick={() => router.push("/producer/" + item.id)}
                         >
                             <div className="imageTable producerImage">
@@ -113,21 +119,25 @@ function ListItem({ data, type, header, total, getList }) {
                             <p>{item.name}</p>
                         </td>
                         <td className="cellTable"
+                            type={type}
                             onClick={() => router.push("/producer/" + item.id)}
                         >
                             {item.representative}
                         </td>
                         <td className="cellTable"
+                           type={type}
                             onClick={() => router.push("/producer/" + item.id)}
                         >
                             {item.phone_number}
                         </td>
                         <td className="cellTable"
+                            type={type}
                             onClick={() => router.push("/producer/" + item.id)}
                         >
                             {item.address}
                         </td>
                         <td className="cellTable edit"
+                            type={type}
                             onClick={() => {
                                 router.push({
                                     pathname: window.location.pathname + '/edit/' + item.id,
@@ -137,6 +147,7 @@ function ListItem({ data, type, header, total, getList }) {
                             <img className="icon" src="/images/edit.png" alt="edit" />
                         </td>
                         <td className="cellTable delete"
+                            type={type}
                             onClick={() => {
                                 toggle();
                                 setItem(item);
@@ -175,7 +186,7 @@ function ListItem({ data, type, header, total, getList }) {
                         ?
                         <div className="pageOption">
                             <div className="pageInfo">
-                                <p>{`${router.query.page || 1}/${Math.ceil(total / (router.query.page_size || 20))}`}</p>
+                                <p>{`Số lượng: ${total} - ${router.query.page || 1}/${Math.ceil(total / (router.query.page_size || 20))}`}</p>
                             </div>
                             <Perpage router={router} />
                             <PaginationComponent router={router} total={total} />

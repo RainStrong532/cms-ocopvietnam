@@ -70,6 +70,9 @@
 .listItemContainer {
     margin-top: 30px;
     padding: 0 60px;
+    .table{
+        overflow-x: auto;
+    }
 }
 .cellTable .icon {
     width: 19px;

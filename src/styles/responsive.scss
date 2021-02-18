@@ -1,0 +1,258 @@
+@import "variables";
+
+@media (min-width: $xl_width) {
+    .container {
+        max-width: $xl_width !important;
+    }
+}
+@media (max-height: 750px) {
+    .login-section {
+        padding: 30px !important;
+    }
+}
+@media (max-width: 1440px){
+    div.login .login-section .loginContent h1:first-child{
+        font-size: 20px;
+        line-height: 1.2;
+    }
+    div.login .login-section .loginContent h1:last-child{
+        font-size: 22px;
+        line-height: 1.2;
+    }
+} 
+@media only screen and (max-width: $lg_width) {
+    div.login .container{
+        padding: 0;
+    }
+    div.login .login-section .loginContent h1:first-child{
+        font-size: 20px;
+        line-height: 1.2;
+    }
+    div.login .login-section .loginContent h1:last-child{
+        font-size: 22px;
+        line-height: 1.2;
+    }
+    .productForm .sectionForm:first-child {
+        margin-right: 20px;
+    }
+    .productForm .sectionForm:last-child {
+        margin-left: 20px;
+    }
+    .listItemContainer {
+        padding: 0 30px;
+    }
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    table {
+        tr {
+            &:last-child {
+                border-bottom: 2px solid #f7f8fc;
+            }
+        }
+    }
+    tr {
+        border-top: 2px solid #f7f8fc;
+    }
+
+    td.cellTable {
+        border: none;
+        position: relative;
+        padding-left: 40% !important;
+    }
+    td:before {
+        position: absolute;
+        top: 50%;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        text-transform: uppercase;
+        color: #a9a9a9;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        transform: translateY(-50%);
+        padding-left: 18px;
+        z-index: 10;
+    }
+    td[type="0"]:nth-child(1)::before {
+        content: "Sản phẩm";
+    }
+    td[type="0"]:nth-child(2)::before {
+        content: "Loại";
+    }
+    td[type="0"]:nth-child(3)::before {
+        content: "Số sao";
+    }
+    td[type="0"]:nth-child(4)::before {
+        content: "Trạng thái";
+    }
+    td[type="0"]:nth-child(5)::before {
+        content: "Sửa";
+    }
+    td[type="0"]:nth-child(6)::before {
+        content: "Xóa";
+    }
+    td[type="1"]:nth-child(1)::before {
+        content: "Nhà sản xuất";
+    }
+    td[type="1"]:nth-child(2)::before {
+        content: "Người đại diện";
+    }
+    td[type="1"]:nth-child(3)::before {
+        content: "Số điện thoại";
+    }
+    td[type="1"]:nth-child(4)::before {
+        content: "Địa chỉ";
+    }
+    td[type="1"]:nth-child(5)::before {
+        content: "Sửa";
+    }
+    td[type="1"]:nth-child(6)::before {
+        content: "Xóa";
+    }
+    .header {
+        height: 98px;
+        padding: 0;
+        position: relative;
+        .backBtn {
+            display: none;
+        }
+        .headerTitle {
+            position: absolute;
+            max-width: 40%;
+            white-space: pre-line;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.1rem;
+        }
+    }
+    .header.headerSearch {
+        position: relative;
+        padding: 25px 30px;
+        .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 40%;
+            white-space: pre-line;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .extentions.open {
+            flex-grow: 1;
+            .search {
+                flex-grow: 1;
+                input {
+                    width: 100%;
+                    opacity: 1;
+                }
+            }
+        }
+        .extentions {
+            transition: all 0.2s ease;
+            .editItem {
+                padding: 10px;
+                img {
+                    margin: 0;
+                }
+                p {
+                    display: none;
+                }
+            }
+            .search {
+                transition: all 0.4s ease;
+                margin-left: 50px;
+                width: 46px;
+                cursor: pointer;
+                img {
+                    margin: 0 10px;
+                }
+                padding: 0;
+                input {
+                    opacity: 0;
+                    transition: opacity 0.1s ease;
+                    width: 0%;
+                }
+            }
+            .addItem {
+                padding: 0;
+                p {
+                    display: none;
+                }
+            }
+        }
+    }
+    .contentContainer {
+        padding: 20px;
+    }
+    .sideBarContainer .sideBar.open {
+        transform: translateX(0);
+    }
+    .sideBarContainer .sideBar {
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        ul li {
+            justify-content: center;
+        }
+    }
+}
+@media only screen and (max-width: $md_width) {
+    div.login .container{
+        padding: 0 50px;
+    }
+    .productForm .sectionForm:first-child,
+    .productForm .sectionForm:last-child {
+        margin: 0;
+    }
+    .contentContainer .content .row {
+        flex-direction: column;
+    }
+    .dia{
+        max-width: none;
+    }
+}
+@media only screen and (max-width: $xs_width) {
+    div.login .login-section .loginContent h1:first-child{
+        font-size: 18px;
+        line-height: 1;
+    }
+    div.login .login-section .loginContent h1:last-child{
+        font-size: 20px;
+        line-height: 1;
+    }
+    div.login .login-section .loginContent{
+        margin: 20px 0 10px;
+    }
+    div.login .container{
+        padding: 0 50px;
+    }
+    .pageOption {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        .perpage{
+            transform: translateX(18%);
+        }
+        &>div, p{
+            margin: 5px 0;
+        }
+    }
+}

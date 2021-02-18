@@ -9,7 +9,7 @@ const Perpage = ({ router }) => {
   const onChangeValue = (value) => {
     const currentPath = router.pathname;
     const currentQuery = router.query;
-    currentQuery.page = currentQuery.page ? parseInt(currentQuery.page) : 1
+    currentQuery.page = 1;
     currentQuery.page_size = parseInt(value);
     setValue(value);
     if (currentQuery.page === 1 && (currentQuery.page_size === 20)) {

@@ -4,7 +4,7 @@ import Router, { useRouter } from 'next/router'
 import { SideBarData } from '../../../constants';
 import { useAuth } from '../../../src/contexts/auth';
 
-function SideBarComponent({ }) {
+function SideBarComponent({open}) {
     const [modal, setModal] = React.useState(false);
     const { logout } = useAuth();
     const toggle = () => setModal(!modal);
@@ -53,7 +53,7 @@ function SideBarComponent({ }) {
         )
     })
     return (
-        <div className="sideBar">
+        <div className={`sideBar${(open && window.innerWidth < 960) ? " open" : ""}`}>
             <div>
                 <img className="logoSideBar" src="/logo.png" alt="image" />
             </div>
@@ -71,14 +71,13 @@ function SideBarComponent({ }) {
                     Bạn có chắc muốn đăng xuất?
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={() => {
+                    <Button color="danger" onClick={() => {
                         toggle();
                         logout();
                     }}>Đồng ý</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Hủy</Button>
                 </ModalFooter>
             </Modal>
-
         </div>
     );
 }

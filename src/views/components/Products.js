@@ -47,16 +47,15 @@ function Products({ router }) {
         }
     }, [router])
     return (
-        (isLoading)
-            ?
             <div className="content">
                 <SearchHeader title="Sản phẩm" pathname={window.location.pathname + "/add"} router={router} />
-                <LoadingScreen />
-            </div>
-            :
-            <div className="content">
-                <SearchHeader title="Sản phẩm" pathname={window.location.pathname + "/add"} router={router} />
-                <ListItem data={listProduct ? listProduct : []} header={headerProduct} type={0} total={total} getList={getProducts} />
+                {
+                    (isLoading)
+                    ?
+                    <LoadingScreen />
+                    :
+                    <ListItem data={listProduct} header={headerProduct} type={0} total={total} getList={getProducts} />
+                }
             </div>
     );
 }

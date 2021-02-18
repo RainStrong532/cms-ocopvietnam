@@ -70,27 +70,35 @@ export const SideBarData = [
 
 export const productType = [
     {
-        name: "food",
+        name: "Đồ ăn",
         value: "food",
     },
     {
-        name: "drink",
+        name: "Đồ uống",
         value: "drink",
     },
     {
-        name: "herbs",
+        name: "Thảo mộc",
         value: "herbs",
     },
     {
-        name: "cloth",
+        name: "Vải",
         value: "cloth",
     },
     {
-        name: "keepsake",
+        name: "Đồ lưu niệm",
         value: "keepsake",
     },
     {
-        name: "travel",
+        name: "Du lịch",
         value: "travel",
     }
 ]
+export const productTypes = {
+    herbs: "Thảo mộc",
+    cloth: "Vải",
+    keepsake: "Đồ lưu niệm",
+    travel: "Du lịch",
+    drink: "Đồ uống",
+    food: "Đồ ăn",
+}

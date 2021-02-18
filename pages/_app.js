@@ -1,4 +1,4 @@
-import "./styles/app.scss";
+import "./../src/styles/app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react'
 import { AuthProvider, ProtectRoute } from "../src/contexts/auth";

@@ -65,7 +65,7 @@ function ProductDetail({ id }) {
                 </div>
                     <div>
                         <Row>
-                            <Col className="sectionForm">
+                            <Col className="sectionForm" >
                                 <div className="inputContainer">
                                     <div className="nameInput detail">Tên sản phẩm</div>
                                     <div className="inpputContent">{name}</div>
@@ -75,7 +75,7 @@ function ProductDetail({ id }) {
                                     <div className="inpputContent">{star}</div>
                                 </div>
                             </Col>
-                            <Col className="sectionForm">
+                            <Col className="sectionForm" >
                                 <div className="inputContainer">
                                     <div className="nameInput detail">Tên nhà sản xuất</div>
                                     <div className="inpputContent">{producer}</div>
@@ -96,7 +96,7 @@ function ProductDetail({ id }) {
                                 <div className="inpputContent">{product}</div>
                             </div>
                         </Col>
-                        <Col className="p-0">
+                        <Col className="p-0" >
                             <div className="inputContainer">
                                 <div className="nameInput detail mb-0">
                                     Hình ảnh sản phẩm
@@ -108,7 +108,7 @@ function ProductDetail({ id }) {
                                 </div>
                             </div>
                         </Col>
-                        <Col className="p-0">
+                        <Col className="p-0" >
                             <div className="inputContainer">
                                 <div className="nameInput detail mb-0">
                                     Hình ảnh quá trình sản xuất
@@ -129,7 +129,7 @@ function ProductDetail({ id }) {
                 </div>
                     <div>
                         <Row>
-                            <Col className="sectionForm">
+                            <Col className="sectionForm" >
                                 <div className="inputContainer">
                                     <div className="nameInput detail">Giấy chứng nhận sản phẩm OCOP</div>
                                     <div className="inpputContent">{certification}</div>
@@ -145,7 +145,7 @@ function ProductDetail({ id }) {
                                     }
                                 </div>
                             </Col>
-                            <Col className="sectionForm">
+                            <Col className="sectionForm" >
                                 <div className="inputContainer">
                                     <div className="nameInput detail">Ngày chứng nhận sản phẩm OCOP</div>
                                     <div className="inpputContent">{startDate}</div>
