@@ -4,7 +4,8 @@ import { lg_width } from '../../../../constants';
 const Burger = ({open, setOpen}) => {
     const [width, setWidth] = useState(window.innerWidth);
     window.onresize = () => {
-        setWidth(window.innerWidth)
+        setWidth(window.innerWidth);
+        console.log("width: ", width);
     }
 
     return (

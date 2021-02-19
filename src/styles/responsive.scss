@@ -5,30 +5,45 @@
         max-width: $xl_width !important;
     }
 }
-@media (max-height: 750px) {
+@media (max-height: 680px) {
+    .login-section {
+        padding: 20px !important;
+    }
+    div.login .container{
+        padding: 0 30px!important;
+    }
+    div.login .container{
+        height: 90%;
+    }
+    div.login .login-section .inputContainer p,
+    div.login .login-section input, div.login .login-section Input{
+        margin-bottom: 0;
+    }
+}
+@media (max-height: 800px) {
     .login-section {
         padding: 30px !important;
     }
 }
-@media (max-width: 1440px){
-    div.login .login-section .loginContent h1:first-child{
+@media (max-width: 1440px) {
+    div.login .login-section .loginContent h1:first-child {
         font-size: 20px;
         line-height: 1.2;
     }
-    div.login .login-section .loginContent h1:last-child{
+    div.login .login-section .loginContent h1:last-child {
         font-size: 22px;
         line-height: 1.2;
     }
-} 
+}
 @media only screen and (max-width: $lg_width) {
-    div.login .container{
+    div.login .container {
         padding: 0;
     }
-    div.login .login-section .loginContent h1:first-child{
+    div.login .login-section .loginContent h1:first-child {
         font-size: 20px;
         line-height: 1.2;
     }
-    div.login .login-section .loginContent h1:last-child{
+    div.login .login-section .loginContent h1:last-child {
         font-size: 22px;
         line-height: 1.2;
     }
@@ -74,13 +89,13 @@
         position: absolute;
         top: 50%;
         left: 6px;
-        width: 45%;
+        width: 40%;
         padding-right: 10px;
         text-transform: uppercase;
         color: #a9a9a9;
         font-size: 14px;
         font-weight: 500;
-        white-space: nowrap;
+        white-space: pre-line;
         transform: translateY(-50%);
         padding-left: 18px;
         z-index: 10;
@@ -122,23 +137,18 @@
         content: "Xóa";
     }
     .header {
-        height: 98px;
-        padding: 0;
+        padding: 20px 60px;
         position: relative;
-        img{
+        img {
             cursor: pointer;
         }
         .backBtn {
             display: none;
         }
         .headerTitle {
-            position: absolute;
-            max-width: 40%;
+            width: 100%;
             white-space: pre-line;
             text-align: center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 1.1rem;
         }
     }
@@ -217,7 +227,7 @@
     }
 }
 @media only screen and (max-width: $md_width) {
-    div.login .container{
+    div.login .container {
         padding: 0 50px;
     }
     .productForm .sectionForm:first-child,
@@ -227,23 +237,23 @@
     .contentContainer .content .row {
         flex-direction: column;
     }
-    .dia{
+    .dia {
         max-width: none;
     }
 }
 @media only screen and (max-width: $xs_width) {
-    div.login .login-section .loginContent h1:first-child{
+    div.login .login-section .loginContent h1:first-child {
         font-size: 18px;
         line-height: 1;
     }
-    div.login .login-section .loginContent h1:last-child{
+    div.login .login-section .loginContent h1:last-child {
         font-size: 20px;
         line-height: 1;
     }
-    div.login .login-section .loginContent{
+    div.login .login-section .loginContent {
         margin: 20px 0 10px;
     }
-    div.login .container{
+    div.login .container {
         padding: 0 50px;
     }
     .pageOption {
@@ -251,11 +261,111 @@
         justify-content: center;
         align-items: center;
         margin-top: 40px;
-        .perpage{
+        .perpage {
             transform: translateX(18%);
         }
-        &>div, p{
+        & > div,
+        p {
             margin: 5px 0;
         }
+    }
+}
+@media only screen and (max-width: $xs_width) {
+    .header.headerSearch {
+        height: auto;
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+    .headerSearch .headerCnt {
+        padding: 0 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        .title {
+            position: static;
+            top: 0;
+            left: 0;
+            width: auto;
+            max-width: none;
+            transform: none;
+            font-size: 1.2rem;
+        }
+        height: 50%;
+    }
+    .headerSearch .extentions {
+        width: 100%;
+        flex-direction: column;
+        .search,
+        button {
+            margin-top: 10px;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100% !important;
+        }
+        .search input {
+            width: 100% !important;
+            opacity: 1 !important;
+        }
+    }
+    .burger {
+        top: 30px!important;
+        left: 25px!important;
+    }
+    .header.headerSearch .extentions .editItem p,
+    .header.headerSearch .extentions .addItem p {
+        display: block;
+        text-align: center;
+    }
+    .header.headerSearch .extentions .editItem,
+    .headerSearch .extentions .addItem {
+        position: relative;
+        padding: 8px 0 !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .headerSearch .extentions .editItem img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        margin: 8.5px!important;
+    }
+    .headerSearch .extentions .addItem img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 42px;
+        height: 42px;
+    }
+    td::before {
+        width: 30%;
+    }
+    td {
+        padding-left: 30px !important;
+    }
+    .firstCol {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        p {
+            margin-top: 5px !important;
+        }
+    }
+    .listItemContainer{
+        padding: 0 15px;
+    }
+    .contentContainer{
+        padding: 10px;
+    }
+    .productForm .section button{
+        white-space: nowrap;
+    }
+    .productForm{
+        padding: 30px 0;
+        .section{
+        padding: 0 15px;
+    }
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Table } from 'reactstrap';
-import { lg_width } from '../../../constants';
+import { lg_width, xs_width } from '../../../constants';
 
 function SearchHeader({ title, pathname, edit, router }) {
     const [showTitle, setShowTitle] = useState(true);
@@ -10,7 +10,7 @@ function SearchHeader({ title, pathname, edit, router }) {
     }
     window.onresize = () => {
         setWidth(window.innerWidth);
-        if (width >= lg_width) {
+        if (width >= lg_width || width <= xs_width) {
             setShowTitle(true);
         }
     }
@@ -36,7 +36,7 @@ function SearchHeader({ title, pathname, edit, router }) {
         }
     }
     const onSearchOpen = () => {
-        if (width < lg_width) {
+        if (width < lg_width && width > xs_width) {
             setShowTitle(!showTitle);
             console.log(showTitle);
         }
