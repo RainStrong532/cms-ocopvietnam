@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated: user, login, loading, logout }}>
+        <AuthContext.Provider value={{ user: user, login, loading, logout }}>
             {children}
         </AuthContext.Provider>
     )
@@ -74,10 +74,10 @@ export const ProtectRoute = ({ children }) => {
     const gotoProduct = () => {
         router.push('/product');
     }
-    const { isAuthenticated, loading } = useAuth();
+    const { user, loading } = useAuth();
     const [windowReady, setWindowReady] = useState(false);
     useEffect(() => {
-        console.log(isAuthenticated, loading, windowReady);
+        console.log(user, loading, windowReady);
         setWindowReady(true);
     }, [windowReady])
     if (!windowReady || loading) {
@@ -87,9 +87,9 @@ export const ProtectRoute = ({ children }) => {
             </div>
         );
     } else {
-        if ((!isAuthenticated && window.location.pathname !== '/login')) {
+        if ((!user && window.location.pathname !== '/login')) {
             gotoLogin();
-        } else if ((window.location.pathname === '/login' || window.location.pathname === '/' || window.location.pathname === '') && isAuthenticated) {
+        } else if ((window.location.pathname === '/login' || window.location.pathname === '/' || window.location.pathname === '') && user) {
             gotoProduct();
         } else {
             return children;

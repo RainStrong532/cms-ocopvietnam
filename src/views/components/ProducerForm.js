@@ -128,7 +128,7 @@ function ProducerForm({ id }) {
                                                 email,
                                                 image,
                                                 is_enable: true,
-                                                user: parseInt(auth.isAuthenticated.user)
+                                                user: parseInt(auth.user.user)
                                             }
                                         } else {
                                             data = {
@@ -139,7 +139,7 @@ function ProducerForm({ id }) {
                                                 address,
                                                 email,
                                                 is_enable: true,
-                                                user: parseInt(auth.isAuthenticated.user)
+                                                user: parseInt(auth.user.user)
                                             }
                                         }
                                         if (!id) {

@@ -204,14 +204,14 @@ function ListItem({ data, type, header, total, getList }) {
                     <Button color="danger" onClick={() => {
                         (async () => {
                             if (type === 0) {
-                                let res = await deleteProductById({ id: itemDelete.id, user: auth.isAuthenticated.user, manufacturer: itemDelete.manufacturer });
+                                let res = await deleteProductById({ id: itemDelete.id, user: auth.user.user, manufacturer: itemDelete.manufacturer });
                                 if (res.id) {
                                     getList();
                                 } else {
                                     alert("Xóa thất bại");
                                 }
                             } else {
-                                let res = await deleteProducerById({ id: itemDelete.id, user: auth.isAuthenticated.user });
+                                let res = await deleteProducerById({ id: itemDelete.id, user: auth.user.user });
                                 if (res.id) {
                                     getList();
                                 } else {

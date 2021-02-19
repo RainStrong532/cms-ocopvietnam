@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Router, { useRouter } from 'next/router'
-import { SideBarData } from '../../../constants';
+import { lg_width, SideBarData } from '../../../constants';
 import { useAuth } from '../../../src/contexts/auth';
 
 function SideBarComponent({open}) {
     const [modal, setModal] = React.useState(false);
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
     const toggle = () => setModal(!modal);
     const router = useRouter();
-
+  
     const SideBarItem = SideBarData.map((item, index) => {
         return (
             (index !== SideBarData.length - 1)
@@ -53,12 +53,12 @@ function SideBarComponent({open}) {
         )
     })
     return (
-        <div className={`sideBar${(open && window.innerWidth < 960) ? " open" : ""}`}>
+        <div className={`sideBar${(open && window.innerWidth < lg_width) ? " open" : ""}`}>
             <div>
                 <img className="logoSideBar" src="/logo.png" alt="image" />
             </div>
             <div className="title_s">
-                Tỉnh Hà Tĩnh
+                {`${user.fullname}`}
             </div>
             <ul>
                 {

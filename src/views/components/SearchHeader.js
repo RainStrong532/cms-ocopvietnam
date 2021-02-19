@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Table } from 'reactstrap';
+import { lg_width } from '../../../constants';
 
 function SearchHeader({ title, pathname, edit, router }) {
     const [showTitle, setShowTitle] = useState(true);
@@ -9,7 +10,7 @@ function SearchHeader({ title, pathname, edit, router }) {
     }
     window.onresize = () => {
         setWidth(window.innerWidth);
-        if(width >= 960){
+        if (width >= lg_width) {
             setShowTitle(true);
         }
     }
@@ -35,8 +36,9 @@ function SearchHeader({ title, pathname, edit, router }) {
         }
     }
     const onSearchOpen = () => {
-        if (width < 960) {
+        if (width < lg_width) {
             setShowTitle(!showTitle);
+            console.log(showTitle);
         }
     }
     return (
@@ -62,6 +64,7 @@ function SearchHeader({ title, pathname, edit, router }) {
                     !edit
                         ?
                         <div className="search"
+                            title="TÌm kiếm"
                         >
                             <img src="/images/search.png" alt="search icon"
                                 onClick={
@@ -69,8 +72,8 @@ function SearchHeader({ title, pathname, edit, router }) {
                                 }
                             />
                             <input type="text" placeholder="Tìm kiếm"
+                                onBlur={onSearchOpen}
                                 onChange={e => {
-                                    // setTextSeach(e.target.value.trim());
                                     onSearch(e.target.value.trim());
                                 }}
                             />
@@ -79,6 +82,7 @@ function SearchHeader({ title, pathname, edit, router }) {
                         <></>
                 }
                 <Button className={edit ? "editItem" : "addItem"}
+                    title={`${edit ? "Chỉnh sửa" : "Thêm mới"}`}
                     onClick={() => {
                         router.push(pathname)
                     }}

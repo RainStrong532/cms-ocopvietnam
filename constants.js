@@ -102,3 +102,8 @@ export const productTypes = {
     drink: "Đồ uống",
     food: "Đồ ăn",
 }
+
+export const xs_width= 576;
+export const md_width= 768;
+export const lg_width= 992;
+export const xl_width= 1440;
